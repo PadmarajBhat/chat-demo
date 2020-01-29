@@ -1,0 +1,34 @@
+<p style="padding:5px"><button mat-raised-button [routerLink]="['/']">Home</button></p>
+
+<div align="center">
+  <div align="center" class="chat-window" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+    <!--<span class = "messages" *ngFor="let msg of chatMessages">-->
+    <ng-container *ngFor="let msg of saveMsg.chatMessages">
+
+      <ng-container *ngIf="msg['user']; else elseBlk">
+        <br />
+        <span class="user-message">
+          {{msg['user']}}
+        </span>
+
+      </ng-container>
+      <ng-template #elseBlk>
+        <span class="bot-message">
+          {{msg['Bot']}}
+        </span>
+      </ng-template>
+
+
+      <br><br />
+
+    </ng-container>
+    
+  </div>
+  <br />
+  <div>
+    Enter your chat text <input type="text" #titleInput name="msg" (keyup.enter)="addMessage(titleInput.value); titleInput.value=''"> 
+    <button type="submit" value="Submit" (click)="addMessage(titleInput.value)"> Send</button>
+  </div>
+
+  
+</div>

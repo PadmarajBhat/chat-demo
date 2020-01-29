@@ -1,0 +1,27 @@
+.chat-window {
+  box-shadow: 0 1px 3px 0 rgba(70, 0, 115, 0.6), 0 1px 1px 0 rgba(70, 0, 115, 0.6), 0 2px 1px -1px rgba(70, 0, 115, 0.6);
+  align-items: center;
+  width: 75%;
+  /*width: 500vw;*/
+  height: 90%;
+  overflow:auto;
+  padding: 1%;
+  
+}
+
+.user-message {
+  box-shadow: 0 1px 3px 0 rgba(70, 0, 115, 0.6), 0 1px 1px 0 rgba(70, 0, 115, 0.6), 0 2px 1px -1px rgba(70, 0, 115, 0.6);
+  align-content: center;
+  align-items: end;
+  float:right;
+  padding :1%;
+}
+
+
+.bot-message {
+  box-shadow: 0 1px 3px 0 rgba(70, 0, 115, 0.6), 0 1px 1px 0 rgba(70, 0, 115, 0.6), 0 2px 1px -1px rgba(70, 0, 115, 0.6);
+  align-content: flex-start;
+  align-items: end;
+  float: left;
+  padding: 5px;
+}

@@ -1,0 +1,15 @@
+.div {
+  position: relative;
+  box-shadow:initial;
+  width: 200px;
+  height: 300px;
+
+  animation-duration: 10s;
+}
+@keyframes example {
+  100% {
+    /*background-color: red;*/
+    left: -700px;
+    top: 0px;
+  }
+}
