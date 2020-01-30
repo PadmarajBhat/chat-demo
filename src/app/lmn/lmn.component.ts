@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./lmn.component.css']
 })
 export class LmnComponent implements OnInit {
-
+  title = "Chat App";
   constructor() { }
 
   ngOnInit() {
