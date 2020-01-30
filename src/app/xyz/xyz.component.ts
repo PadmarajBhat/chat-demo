@@ -8,7 +8,7 @@ import { SavemsgService } from '../savemsg.service';
 })
 export class XyzComponent implements OnInit {
  
-  constructor(private saveMsg: SavemsgService) {
+  constructor(public saveMsg: SavemsgService) {
   }
 
   ngOnInit() {
