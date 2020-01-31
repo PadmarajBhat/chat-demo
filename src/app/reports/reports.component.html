@@ -16,7 +16,7 @@
     
     <button mat-raised-button *ngIf="!drawer.opened" (click)="drawer.toggle()" [routerLink]="['/reports']"> Back</button>
     
-    <div [style.height.px]="height" [style.width.px]="width">
+    <div [(style.height.px)]="height" [style.width.px]="width">
       <!--style="width:500px;height:700px;align-content:center">-->
 
       <router-outlet></router-outlet>
