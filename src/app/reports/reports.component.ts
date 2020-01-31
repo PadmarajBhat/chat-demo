@@ -8,6 +8,8 @@ declare var google: any;
 export class ReportsComponent implements OnInit {
 
   chartsLoaded = false;
+  height = window.innerHeight;
+  width = window.innerWidth;
   constructor() { }
 
   ngOnInit() {
