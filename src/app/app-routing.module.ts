@@ -5,6 +5,7 @@ import { ReportsComponent } from './reports/reports.component';
 import { CareerlevelfraudtrendComponent } from './reports/charts/careerlevelfraudtrend/careerlevelfraudtrend.component';
 import { RecruitedbyComponent } from './reports/charts/recruitedby/recruitedby.component';
 import { LmnComponent } from './lmn/lmn.component';
+import { CustomersComponent } from './customers/customers.component';
 
 
 
@@ -18,6 +19,7 @@ const routes: Routes = [
       { path: "recruitedby", component: RecruitedbyComponent },
     ]
   },
+  { path: "customers", component: CustomersComponent },
   ]
   
 

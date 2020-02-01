@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, HostListener } from '@angular/core';
 
 declare var google: any;
 @Component({
@@ -9,9 +9,20 @@ declare var google: any;
 export class CareerlevelfraudtrendComponent implements OnInit, AfterViewInit {
   myHeight = window.innerHeight;
   myWidth = window.innerWidth;
+  getHeight() {
+    return window.innerHeight;
+  }
+  getWeight() { return window.innerWidth; }
+
+  getHeight1() {
+    let dummy = window.innerHeight;
+    return window.innerHeight * .75;
+  }
+  getWeight1() { return window.innerWidth * .75; }
+
   @ViewChild("pieChart", { static: false }) pieChart: ElementRef;
   drawChart = () => {
-    let data = google.visualization.arrayToDataTable([
+  const data = google.visualization.arrayToDataTable([
       ['Task', 'Hours per Day'],
       ['Work', 11],
       ['Eat', 2.7],
@@ -38,6 +49,12 @@ export class CareerlevelfraudtrendComponent implements OnInit, AfterViewInit {
     google.charts.load('current', { 'packages': ['corechart'] });
     google.charts.setOnLoadCallback(this.drawChart);
   }
+
+  //@HostListener('window:orientationchange', ['$event'])
+  //onOrientationChange(event) {
+  //  google.charts.load('current', { 'packages': ['corechart'] });
+  //  google.charts.setOnLoadCallback(this.drawChart);
+  //}
 
   constructor() { }
 

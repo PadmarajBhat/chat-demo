@@ -1,28 +1,29 @@
+<div>
+  <mat-sidenav-container>
+    <mat-sidenav #drawer mode="side" opened style="padding:1%">
+      <br>
+      <button mat-button [routerLink]="['/']"> Home </button>
+      <br>
+      <button mat-button (click)="drawer.toggle(!isBrowser())" color="primary" [routerLink]="['recruitedby']"> recruitedBy </button>
+      <br />
+      <button mat-button (click)="drawer.toggle(!isBrowser())" color="primary" [routerLink]="['careerlevel']"> careerLevelTrend </button>
+      <br>
+    </mat-sidenav>
 
-<mat-sidenav-container>
-  <mat-sidenav #drawer mode="side" opened style="padding:1%" >
-    <br>
-    <button mat-button [routerLink]="['/']"> Home </button>
-    <br>
-    <button mat-button (click)="drawer.toggle()" (hover)= "drawer.toggle()" color="primary" [routerLink]="['recruitedby']"> recruitedBy </button>
-    <br />
-    <button mat-button (click)="drawer.toggle()" color="primary" [routerLink]="['careerlevel']"> careerLevelTrend </button>
-    <br>
-  </mat-sidenav>
+    <mat-sidenav-content>
+      <br>
+      <br>
 
-  <mat-sidenav-content>
-    <br>
-    <br>
-    
-    <button mat-raised-button *ngIf="!drawer.opened" (click)="drawer.toggle()" [routerLink]="['/reports']"> Back</button>
-    
-    <div #mydiv [(style.height.px)]="height" [style.width.px]="width">
-      <!--style="width:500px;height:700px;align-content:center">-->
+      <button mat-raised-button *ngIf="!drawer.opened" (click)="drawer.toggle()" [routerLink]="['/reports']"> Back</button>
 
-      <router-outlet></router-outlet>
-    </div>
-  </mat-sidenav-content>
-  
+      <div #mydiv [style.height.px]="getHeight()" [style.width.px]="getWeight()">
+        <!--style="width:500px;height:700px;align-content:center">-->
 
-</mat-sidenav-container>
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
 
+
+  </mat-sidenav-container>
+
+</div>

@@ -7,8 +7,17 @@ import { SavemsgService } from '../savemsg.service';
   styleUrls: ['./customers.component.css']
 })
 export class CustomersComponent implements OnInit {
+  myHeight = window.innerHeight - 300;
+  //constructor() { this.myHeight = getHieght();}
 
-  constructor() { ser: SavemsgService}
+  public getHieght() {
+    console.log("height :", window.innerHeight);
+    return window.innerHeight;
+  }
+  constructor() {
+    ser: SavemsgService;
+    console.log("customers loading");
+  }
 
   ngOnInit() {
   }

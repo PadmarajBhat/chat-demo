@@ -9,6 +9,7 @@ import { LmnComponent } from './lmn/lmn.component';
 import { ReportsComponent } from './reports/reports.component';
 import { CareerlevelfraudtrendComponent } from './reports/charts/careerlevelfraudtrend/careerlevelfraudtrend.component';
 import { RecruitedbyComponent } from './reports/charts/recruitedby/recruitedby.component';
+import { CustomersComponent } from './customers/customers.component';
 
 import { MatCommonModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
@@ -27,6 +28,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReportsComponent,
     CareerlevelfraudtrendComponent,
     RecruitedbyComponent,
+    CustomersComponent,
    ],
   imports: [
     BrowserModule,
