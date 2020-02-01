@@ -7,6 +7,8 @@ declare var google: any;
   styleUrls: ['./careerlevelfraudtrend.component.css']
 })
 export class CareerlevelfraudtrendComponent implements OnInit, AfterViewInit {
+  myHeight = window.innerHeight;
+  myWidth = window.innerWidth;
   @ViewChild("pieChart", { static: false }) pieChart: ElementRef;
   drawChart = () => {
     let data = google.visualization.arrayToDataTable([
