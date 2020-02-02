@@ -4,9 +4,9 @@
       <br>
       <button mat-button [routerLink]="['/']"> Home </button>
       <br>
-      <button mat-button (click)="drawer.toggle(!isBrowser())" color="primary" [routerLink]="['recruitedby']"> recruitedBy </button>
+      <button mat-button (click)="drawer.toggle(isBrowser())" color="primary" [routerLink]="['recruitedby']"> recruitedBy </button>
       <br />
-      <button mat-button (click)="drawer.toggle(!isBrowser())" color="primary" [routerLink]="['careerlevel']"> careerLevelTrend </button>
+      <button mat-button (click)="drawer.toggle(isBrowser())" color="primary" [routerLink]="['careerlevel']"> careerLevelTrend </button>
       <br>
     </mat-sidenav>
 
@@ -16,9 +16,7 @@
 
       <button mat-raised-button *ngIf="!drawer.opened" (click)="drawer.toggle()" [routerLink]="['/reports']"> Back</button>
 
-      <div #mydiv [style.height.px]="getHeight()" [style.width.px]="getWeight()">
-        <!--style="width:500px;height:700px;align-content:center">-->
-
+      <div #mydiv [style.height.px]="getHeight()" >
         <router-outlet></router-outlet>
       </div>
     </mat-sidenav-content>

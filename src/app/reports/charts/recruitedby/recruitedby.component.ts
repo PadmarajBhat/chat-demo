@@ -28,14 +28,7 @@ declare var google: any;
 })
 
 export class RecruitedbyComponent implements OnInit, AfterViewInit {
-  ngOnInit() {
-    /*let url = 'https://www.gstatic.com/charts/loader.js';
-    //this.loadScript(url).then(() => { console.log("loaded") });
-    //this.loadScript('../assets/js/my-library.js');
 
-    console.log("Loading : ", url,google);*/
-    //console.log("Loading : ", typeof(   google));
-  }
   @ViewChild("pieChart", { static: false }) pieChart: ElementRef;
 
   drawChart = () => {
@@ -55,29 +48,17 @@ export class RecruitedbyComponent implements OnInit, AfterViewInit {
       },
     };
 
-    //console.log("Data in the recuritedby:", data);
-    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+    var chart = new google.visualization.PieChart(this.pieChart.nativeElement);
 
     chart.draw(data, options);
   }
+
+  ngOnInit() {
+  }
+
   ngAfterViewInit() {
-  //  //declare var google: any;
-  //  console.log("in ngAfterViewInit");
     google.charts.load('current', { 'packages': ['corechart'] });
     google.charts.setOnLoadCallback(this.drawChart);
   }
 
-  /*private loadScript(styleUrl: string) {
-    return new Promise((resolve, reject) => {
-      const body = <HTMLDivElement>document.body;
-      const script = document.createElement('script');
-      script.innerHTML = '';
-      script.src = styleUrl;
-      script.async = false;
-    script.defer = true;
-    script.onload = resolve;
-      body.appendChild(script);
-    });
-
-  }*/
 }

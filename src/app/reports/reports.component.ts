@@ -1,5 +1,4 @@
-import { Component, OnInit, HostListener, ChangeDetectorRef, ElementRef, ViewChild } from '@angular/core';
-import { MatSidenavModule } from '@angular/material/sidenav';
+import { Component, OnInit, HostListener, ElementRef, ViewChild, Renderer } from '@angular/core';
 
 import { Router } from '@angular/router';
 declare var google: any;
@@ -9,24 +8,17 @@ declare var google: any;
   styleUrls: ['./reports.component.css']
 })
 export class ReportsComponent implements OnInit {
-  @ViewChild('mydiv', { static: false }) pRef: ElementRef;
-  @ViewChild('drawer', { static: false }) drawer: MatSidenavModule;
+  @ViewChild('mydiv', { static: false }) myDiv: ElementRef;
 
-  chartsLoaded = false;
-  height = window.innerHeight;
-  width = window.innerWidth;
-  constructor(private rout: Router, private ref: ChangeDetectorRef) { }
+  constructor(private renderer: Renderer) { }
 
   getHeight() {
-    return window.innerHeight;
-  }
-  getWeight() {
-    return window.innerWidth;
+    return screen.availHeight;
   }
 
   isBrowser() {
     console.log("the device : ", navigator.userAgent, navigator.userAgent.indexOf("WOW") );
-    if (/*this.drawer.nativeElement.opened && this.getWeight() < 400*/ navigator.userAgent.indexOf("WOW") < 0) {
+    if ( navigator.userAgent.indexOf("WOW") > 0) {
       return true;
     }
   }
@@ -49,25 +41,9 @@ export class ReportsComponent implements OnInit {
     });
   }
 
-  //@HostListener('window:orientationchange', ['$event'])
-  //onOrientationChange(event) {
-  //  this.ref.detach();
-  //  console.log('orientationChanged');
-  //  this.height = window.innerHeight;
-  //  this.width = window.innerWidth;
-  //  this.pRef.nativeElement.style.height = this.height;
-  //  this.pRef.nativeElement.style.width = this.width;
-    
-    
-  //  this.ref.reattach();
-  //  //this.rout.navigateByUrl('/');
-  //  const body = <HTMLDivElement>document.body;
-  //  //$("#div1").load();
-  //  const div = body.getElementsByClassName("mainBar").item;
-  //  //window.location.reload();
-    
-  //  console.log("trying to rerender", this.pRef, this.pRef.nativeElement.style.height, this.pRef.nativeElement.style.width);
-
-  //}
+  @HostListener('window:orientationchange', ['$event'])
+  onOrientationChange() {
+    this.renderer.setElementStyle(this.myDiv.nativeElement, 'height', screen.availHeight.toString() + "px");         
+  }
 
 }
