@@ -61,4 +61,12 @@ export class RecruitedbyComponent implements OnInit, AfterViewInit {
     google.charts.setOnLoadCallback(this.drawChart);
   }
 
+  getMyStyle() {
+    return {
+      'height.px': screen.availHeight * .75,
+      'align-self': 'center',
+      'width':'inherit'
+    }
+  }
+
 }
