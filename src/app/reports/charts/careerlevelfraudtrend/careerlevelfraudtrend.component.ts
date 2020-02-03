@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, HostListener } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, HostListener, OnChanges } from '@angular/core';
 
 declare var google: any;
 @Component({
@@ -6,7 +6,7 @@ declare var google: any;
   templateUrl: './careerlevelfraudtrend.component.html',
   styleUrls: ['./careerlevelfraudtrend.component.css']
 })
-export class CareerlevelfraudtrendComponent implements OnInit, AfterViewInit {
+export class CareerlevelfraudtrendComponent implements OnInit, AfterViewInit,OnChanges {
   myHeight = window.innerHeight;
   myWidth = window.innerWidth;
   getHeight() {
@@ -64,26 +64,44 @@ export class CareerlevelfraudtrendComponent implements OnInit, AfterViewInit {
       console.log(c);
     }
     
-    
+    console.log("what is my screen orientation : ", screen.orientation, screen.orientation.type, screen.orientation.angle);
   }
   
 
-  @HostListener('window:orientationchange', ['$event'])
+  //@HostListener('window:orientationchange', ['$event'])
+  @HostListener('window:resize', ['$event'])
   onOrientationChange(event) {
+    console.log("does we have anything in event ? ", event.eventPhase);
+    //let abc = new Promise((resolve, reject) => {
+    //  if (event.eventPhase == 0) {
+    //    resolve(0);
+    //  }
+      
+    //});
 
-    window.addEventListener('orientationchange', function () {
-      // After orientationchange, add a one-time resize event
-      var afterOrientationChange = function () {
-        // YOUR POST-ORIENTATION CODE HERE
-        // Remove the resize event listener after it has executed
-        console.log("reloading ...", window.onorientationchange);
-        let myElem = document.getElementById("piechart");
-        myElem.removeChild(myElem.firstChild);
-        google.charts.setOnLoadCallback(this.drawChart);
-        window.removeEventListener('resize', afterOrientationChange);
-      };
-      window.addEventListener('resize', afterOrientationChange);
-    });
+    //const xyz = async () => {
+    //  await abc.then(() => {
+    //    console.log("eventPhase completed !!!!: ", event.eventPhase);
+    //  });
+    //}
+    //xyz;
+
+    console.log("what is my screen orientation : ", screen.orientation, screen.orientation.type, screen.orientation.angle);
+    let myElem = document.getElementById("piechart");
+    myElem.removeChild(myElem.firstChild);
+    //window.addEventListener('orientationchange', function () {
+    //  // After orientationchange, add a one-time resize event
+    //  var afterOrientationChange = function () {
+    //    // YOUR POST-ORIENTATION CODE HERE
+    //    // Remove the resize event listener after it has executed
+    //    console.log("reloading ...", window.onorientationchange);
+    //    let myElem = document.getElementById("piechart");
+    //    myElem.removeChild(myElem.firstChild);
+    //    google.charts.setOnLoadCallback(this.drawChart);
+    //    window.removeEventListener('resize', afterOrientationChange);
+    //  };
+    //  window.addEventListener('resize', afterOrientationChange);
+    //});
     
 
     //let Gheight = Number(window.getComputedStyle(document.getElementById('matCard')).height.split("px")[0]);
@@ -120,12 +138,16 @@ export class CareerlevelfraudtrendComponent implements OnInit, AfterViewInit {
     
     console.log(window.innerHeight, window.innerWidth, screen.height, screen.width);
     //google.charts.load('current', { 'packages': ['corechart'] });
-    //google.charts.setOnLoadCallback(this.drawChart);
+    google.charts.setOnLoadCallback(this.drawChart);
+    console.log("does we have anything in event ? ", event.eventPhase);
   }
 
   constructor() { }
 
   ngOnInit() {
+  }
+  ngOnChanges() {
+    console.log("Am I being called when screen orientation changes ?????");
   }
 
 }
