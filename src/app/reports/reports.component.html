@@ -11,12 +11,13 @@
     </mat-sidenav>
 
     <mat-sidenav-content>
-      <br>
-      <br>
-
-      <button mat-raised-button *ngIf="!drawer.opened" (click)="drawer.toggle()" [routerLink]="['/reports']"> Back</button>
-
-      <div #mydiv [style.height.px]="getHeight()" >
+      <!--<br>
+  <br>-->
+      <!---->
+      <div id="myDiv" #mydiv [style.height.px]="getHeight()">
+        <div style="padding:1%">
+          <button mat-raised-button *ngIf="!drawer.opened" (click)="drawer.toggle()" [routerLink]="['/reports']"><<</button>
+        </div>
         <router-outlet></router-outlet>
       </div>
     </mat-sidenav-content>

@@ -13,7 +13,7 @@ export class ReportsComponent implements OnInit {
   constructor(private renderer: Renderer) { }
 
   getHeight() {
-    return screen.availHeight;
+    return screen.availHeight * .99;
   }
 
   isBrowser() {
