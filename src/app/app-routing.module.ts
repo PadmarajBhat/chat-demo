@@ -6,6 +6,7 @@ import { CareerlevelfraudtrendComponent } from './reports/charts/careerlevelfrau
 import { RecruitedbyComponent } from './reports/charts/recruitedby/recruitedby.component';
 import { LmnComponent } from './lmn/lmn.component';
 import { CustomersComponent } from './customers/customers.component';
+import { WidthCheckComponent } from './width-check/width-check.component';
 
 
 
@@ -20,7 +21,8 @@ const routes: Routes = [
     ]
   },
   { path: "customers", component: CustomersComponent },
-  ]
+  { path: "width", component: WidthCheckComponent },
+]
   
 
 @NgModule({

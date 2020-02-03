@@ -19,6 +19,7 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { HttpClientModule } from '@angular/common/http';
 import { CustomersModule } from './customers/customers.module';
+import { WidthCheckComponent } from './width-check/width-check.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { CustomersModule } from './customers/customers.module';
     ReportsComponent,
     CareerlevelfraudtrendComponent,
     RecruitedbyComponent,
+    WidthCheckComponent,
     //CustomersComponent,
    ],
   imports: [
