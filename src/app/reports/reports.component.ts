@@ -42,9 +42,9 @@ export class ReportsComponent implements OnInit {
     });
   }
 
-  @HostListener('window:orientationchange', ['$event'])
-  onOrientationChange() {
-    this.renderer.setElementStyle(this.myDiv.nativeElement, 'height', screen.availHeight.toString() + "px");         
-  }
+  //@HostListener('window:orientationchange', ['$event'])
+  //onOrientationChange() {
+  //  this.renderer.setElementStyle(this.myDiv.nativeElement, 'height', screen.availHeight.toString() + "px");         
+  //}
 
 }
