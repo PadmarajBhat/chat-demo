@@ -78,7 +78,7 @@ export class WidthCheckComponent implements OnInit {
     }
   }
 
-  @HostListener('window:orientationchange', ['$event']) onOrientationChange() {
+  @HostListener('window:orientationchange') onOrientationChange() {
     console.log("orientation changes in progress...");
     //this.renderer.setElementStyle(document.getElementById("outerDiv"), 'height', this.getOuterHieght().toString()+"px");
     //this.renderer.setElementStyle(this.outerDiv.nativeElement, 'height', '500px');

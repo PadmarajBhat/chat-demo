@@ -23,7 +23,7 @@ export class CustomersComponent implements OnInit {
   ngOnInit() {
   }
 
-  @HostListener('window:orientationchange', ['$event']) orientationchange() {
+  @HostListener('window:orientationchange') orientationchange() {
     this.renderer.setElementStyle(this.myDiv.nativeElement, 'height', screen.availHeight.toString() + "px"); 
   }
   

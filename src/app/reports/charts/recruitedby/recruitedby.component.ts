@@ -107,7 +107,7 @@ export class RecruitedbyComponent implements OnInit, AfterViewInit {
     }
   }
 
-  @HostListener('window:orientationchange', ['$event'])
+  @HostListener('window:resize')
   onOrientationChange() {
     //this.renderer.setElementStyle(this.pieChart.nativeElement, 'height', screen.availHeight.toString() + "px");
     console.log("trying to redraw");
