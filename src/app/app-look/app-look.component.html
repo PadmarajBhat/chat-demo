@@ -4,16 +4,17 @@
   </mat-toolbar-row>
 </mat-toolbar>
 <mat-sidenav-container class="example-container">
-  <mat-sidenav opened mode="side" role="region">Start content can be this wide or what ????It seems to be increasing even more</mat-sidenav>
-  <mat-sidenav opened mode="side" position="end">End content, what about this ? is it full ?It seems to be increasing even more</mat-sidenav>
-
-  <mat-card style="top:25%;left:25%;height:50%;width:50%;" class="example-card">
+  <mat-sidenav opened mode="side" role="region">First Side Bar</mat-sidenav>
+  <mat-sidenav opened mode="side" position="end">End Side Bar</mat-sidenav>
+  <!--style="top:25%;left:25%;height:50%;width:50%;"-->
+  <mat-card class="example-card">
     <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
+      <!--<div mat-card-avatar class="example-header-image"></div>-->
       <mat-card-title>Shiba Inu</mat-card-title>
       <mat-card-subtitle>Dog Breed</mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+    <!--<img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">-->
+    <img mat-caard-image id="piechart"/>
     <mat-card-content>
       <p>
         The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
@@ -22,8 +23,13 @@
       </p>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button>LIKE</button>
-      <button mat-button>SHARE</button>
+      <button mat-flat-button>Back</button>
     </mat-card-actions>
   </mat-card>
 </mat-sidenav-container>
+
+<!--<mat-toolbar style="height:5%">
+  <mat-toolbar-row>
+    <span style="font-size:small">Footer</span>
+  </mat-toolbar-row>
+  </mat-toolbar>-->
