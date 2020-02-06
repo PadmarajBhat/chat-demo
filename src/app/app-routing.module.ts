@@ -7,6 +7,7 @@ import { RecruitedbyComponent } from './reports/charts/recruitedby/recruitedby.c
 import { LmnComponent } from './lmn/lmn.component';
 import { CustomersComponent } from './customers/customers.component';
 import { WidthCheckComponent } from './width-check/width-check.component';
+import { AppLookComponent } from './app-look/app-look.component';
 
 
 
@@ -22,6 +23,8 @@ const routes: Routes = [
   },
   { path: "customers", component: CustomersComponent },
   { path: "width", component: WidthCheckComponent },
+  { path: "app", component: AppLookComponent },
+
 ]
   
 

@@ -20,6 +20,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import { CustomersModule } from './customers/customers.module';
 import { WidthCheckComponent } from './width-check/width-check.component';
+import { AppLookComponent } from './app-look/app-look.component';
+
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -31,6 +34,7 @@ import { WidthCheckComponent } from './width-check/width-check.component';
     CareerlevelfraudtrendComponent,
     RecruitedbyComponent,
     WidthCheckComponent,
+    AppLookComponent,
     //CustomersComponent,
    ],
   imports: [
@@ -43,6 +47,7 @@ import { WidthCheckComponent } from './width-check/width-check.component';
     HttpClientModule,
     MatButtonModule,
     CustomersModule,
+    MatToolbarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
