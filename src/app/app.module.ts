@@ -23,6 +23,7 @@ import { WidthCheckComponent } from './width-check/width-check.component';
 import { AppLookComponent } from './app-look/app-look.component';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { ButtonsComponent } from './reports/charts/buttons/buttons.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     RecruitedbyComponent,
     WidthCheckComponent,
     AppLookComponent,
+    ButtonsComponent,
     //CustomersComponent,
    ],
   imports: [
