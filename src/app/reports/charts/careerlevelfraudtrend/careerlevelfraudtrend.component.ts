@@ -9,6 +9,9 @@ declare var google: any;
 export class CareerlevelfraudtrendComponent implements OnInit, AfterViewInit,OnChanges {
   myHeight = window.innerHeight;
   myWidth = window.innerWidth;
+
+  imageURL; imageLive = false;
+
   getHeight() {
     return window.innerHeight;
   }
@@ -51,6 +54,10 @@ export class CareerlevelfraudtrendComponent implements OnInit, AfterViewInit,OnC
     var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 
     chart.draw(data, options);
+    this.imageURL = chart.getImageURI();
+    this.imageLive = true;
+
+    console.log(this.imageURL, this.imageLive, typeof this.imageLive, typeof this.imageURL);
   }
   ngAfterViewInit() {
     //  //declare var google: any;

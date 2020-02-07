@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import {
+  getSupportedInputTypes,
+  Platform,
+  supportsPassiveEventListeners,
+  supportsScrollBehavior,
+} from '@angular/cdk/platform';
 
 
 @Component({
@@ -7,8 +13,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app-look.component.css']
 })
 export class AppLookComponent implements OnInit {
-
-  constructor() { }
+  
+  constructor(public platform: Platform) {
+    console.log(this.platform);
+  }
 
   ngOnInit() {
   }

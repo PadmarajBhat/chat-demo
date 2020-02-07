@@ -1,11 +1,14 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <span>Custom Toolbar</span>
+    <span>Custom Toolbar : {{platform.ANDROID}} {{platform.isBrowser}}</span>
   </mat-toolbar-row>
 </mat-toolbar>
 <mat-sidenav-container class="example-container">
-  <mat-sidenav opened mode="side" role="region">First Side Bar</mat-sidenav>
-  <mat-sidenav opened mode="side" position="end">End Side Bar</mat-sidenav>
+  <mat-sidenav #side2 opened mode="side" role="region">First Side Bar</mat-sidenav>
+  <mat-sidenav   (hover) = "side2.toggle(platform.isBrowser)" opened mode="side" position="end">End Side Bar</mat-sidenav>
+  
+
+  
   <!--style="top:25%;left:25%;height:50%;width:50%;"-->
   <mat-card class="example-card">
     <mat-card-header>
