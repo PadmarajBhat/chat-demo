@@ -9,7 +9,9 @@
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
 
 mat-card {
-  padding: 1%;
-  margin:1%;
+  /*padding: 15%;*/
+  margin: 5%;
   /*border:dotted;*/
+  height: 350px;
+  background-color:white;
 }
