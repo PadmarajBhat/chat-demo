@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, HostListener, OnChanges } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, HostListener, OnChanges, ViewChildren } from '@angular/core';
 
 declare var google: any;
 @Component({
@@ -6,31 +6,26 @@ declare var google: any;
   templateUrl: './careerlevelfraudtrend.component.html',
   styleUrls: ['./careerlevelfraudtrend.component.css']
 })
+
 export class CareerlevelfraudtrendComponent implements OnInit, AfterViewInit,OnChanges {
-  myHeight = window.innerHeight;
-  myWidth = window.innerWidth;
 
-  imageURL; imageLive = false;
+  @ViewChild("pieChart0", { static: false }) pieChart0: ElementRef;
+  @ViewChild("pieChart1", { static: false }) pieChart1: ElementRef;
+  @ViewChild("pieChart2", { static: false }) pieChart2: ElementRef;
+  @ViewChild("pieChart3", { static: false }) pieChart3: ElementRef;
+  //@ViewChildren(ElementRef) charts;
 
-  getHeight() {
-    return window.innerHeight;
+  getCareerLevelFraudStyle() {
+    return {
+      'margin': '5%',
+      'background-color': 'white',
+      'display': 'flex',
+      'flex-direction': 'column',
+      'height.px':window.innerHeight*.8
+    }
   }
-  getWeight() { return window.innerWidth; }
-
-  getHeight1() {
-    let dummy = window.innerHeight;
-    return window.innerHeight * .75;
-  }
-  getWeight1() { return window.innerWidth * .75; }
-
-  @ViewChild("pieChart", { static: false }) pieChart: ElementRef;
-  @ViewChild("matCard", { static: false }) matCard: ElementRef;
-  
 
   drawChart = () => {
-    console.log(this.matCard, this.matCard.nativeElement);
-    let Gheight = Number(window.getComputedStyle(document.getElementById('matCard')).height.split("px")[0]);
-    let Gwidth = Number(window.getComputedStyle(document.getElementById('matCard')).width.split("px")[0]);
 
   const data = google.visualization.arrayToDataTable([
       ['Task', 'Hours per Day'],
@@ -46,31 +41,25 @@ export class CareerlevelfraudtrendComponent implements OnInit, AfterViewInit,OnC
         duration: 10000,
         easing: 'in'
       },
-      //height: Gheight* .8,
-      //width: Gwidth * .9
     };
 
-    //console.log("Data in the recuritedby:", data);
-    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
+    var chart = new google.visualization.PieChart(document.getElementById("pieChart0"));
     chart.draw(data, options);
-    this.imageURL = chart.getImageURI();
-    this.imageLive = true;
 
-    console.log(this.imageURL, this.imageLive, typeof this.imageLive, typeof this.imageURL);
+    var chart = new google.visualization.PieChart(document.getElementById("pieChart1"));
+    chart.draw(data, options);
+
+    var chart = new google.visualization.PieChart(document.getElementById("pieChart2"));
+    chart.draw(data, options);
+
+    var chart = new google.visualization.PieChart(document.getElementById("pieChart3"));
+    chart.draw(data, options);
   }
   ngAfterViewInit() {
-    //  //declare var google: any;
-    //  console.log("in ngAfterViewInit");
+
     google.charts.load('current', { 'packages': ['corechart'] });
     google.charts.setOnLoadCallback(this.drawChart);
 
-    let matCard = document.getElementById("matCard");
-    console.log("printing matCard children :", matCard.children);
-    for (let c in matCard.children) {
-      console.log(c);
-    }
-    
     console.log("what is my screen orientation : ", screen.orientation, screen.orientation.type, screen.orientation.angle);
   }
   
@@ -78,24 +67,11 @@ export class CareerlevelfraudtrendComponent implements OnInit, AfterViewInit,OnC
   //@HostListener('window:orientationchange', ['$event'])
   @HostListener('window:resize', ['$event'])
   onOrientationChange(event) {
-    console.log("does we have anything in event ? ", event.eventPhase);
-    //let abc = new Promise((resolve, reject) => {
-    //  if (event.eventPhase == 0) {
-    //    resolve(0);
-    //  }
-      
-    //});
-
-    //const xyz = async () => {
-    //  await abc.then(() => {
-    //    console.log("eventPhase completed !!!!: ", event.eventPhase);
-    //  });
-    //}
-    //xyz;
-
-    console.log("what is my screen orientation : ", screen.orientation, screen.orientation.type, screen.orientation.angle);
-    let myElem = document.getElementById("piechart");
-    myElem.removeChild(myElem.firstChild);
+    for (var i = 0; i <= 3; i++) {
+      let myElem = document.getElementById("pieChart"+i);
+      myElem.removeChild(myElem.firstChild);
+    }
+    
     //window.addEventListener('orientationchange', function () {
     //  // After orientationchange, add a one-time resize event
     //  var afterOrientationChange = function () {

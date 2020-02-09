@@ -2,7 +2,7 @@
 
   <button mat-raised-button style="position:sticky;margin:1%;top:0;left:0;right:auto;bottom:auto; z-index:5;" [routerLink]="['/reports']"><<</button>
 
-  <mat-card id="matCard" #matCard>
+  <mat-card [ngStyle]="getCareerLevelFraudStyle()">
 
     <mat-card-header>
 
@@ -12,12 +12,12 @@
 
     </mat-card-header>
 
-    <mat-card-content id="piechart" #piechart>
+    <mat-card-content id="pieChart0" #pieChart0>
     </mat-card-content>
 
   </mat-card>
 
-  <mat-card id="matCard" #matCard>
+  <mat-card [ngStyle]="getCareerLevelFraudStyle()">
 
     <mat-card-header>
 
@@ -27,12 +27,12 @@
 
     </mat-card-header>
 
-    <mat-card-content id="piechart" #piechart>
+    <mat-card-content id="pieChart1" #pieChart1>
     </mat-card-content>
 
   </mat-card>
 
-  <mat-card id="matCard" #matCard>
+  <mat-card [ngStyle]="getCareerLevelFraudStyle()">
 
     <mat-card-header>
 
@@ -42,12 +42,12 @@
 
     </mat-card-header>
 
-    <mat-card-content id="piechart" #piechart>
+    <mat-card-content id="pieChart2" #pieChart2>
     </mat-card-content>
 
   </mat-card>
 
-  <mat-card id="matCard" #matCard>
+  <mat-card [ngStyle]="getCareerLevelFraudStyle()">
 
     <mat-card-header>
 
@@ -57,7 +57,7 @@
 
     </mat-card-header>
 
-    <mat-card-content id="piechart" #piechart>
+    <mat-card-content id="pieChart3" #pieChart3>
     </mat-card-content>
 
   </mat-card>
