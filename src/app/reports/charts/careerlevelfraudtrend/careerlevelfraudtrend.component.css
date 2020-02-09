@@ -1,11 +1,3 @@
-.example-card {
-  width: 90%;
-  height: 90%;
-  background-color:lightgreen;
-  vertical-align:central;
-  position:center
-}
-
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
 
 mat-card {
