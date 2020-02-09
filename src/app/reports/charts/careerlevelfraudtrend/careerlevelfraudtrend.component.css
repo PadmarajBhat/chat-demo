@@ -4,6 +4,13 @@ mat-card {
   /*padding: 15%;*/
   margin: 5%;
   /*border:dotted;*/
-  height: 350px;
+  height: 500px;
   background-color:white;
+  display:flex;
+  flex-direction:column;
+}
+
+
+mat-card-content{
+    flex:1;
 }
