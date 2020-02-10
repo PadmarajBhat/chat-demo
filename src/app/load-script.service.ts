@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-
+import { error } from 'util';
+export declare var google: any;
 const myScripts = [
-  { name: 'googleMaps', src: 'https://www.gstatic.com/charts/loader.js' }
+  { name: 'googleCharts', src: 'https://www.gstatic.com/charts/loader.js' }
 ];
 
 @Injectable({
@@ -10,7 +11,8 @@ const myScripts = [
 export class LoadScriptService {
 
   private scripts: any = {};
-  loaded = false;
+  isScriptLoaded = false;
+  google: any;
 
   constructor() {
     myScripts.forEach((script: any) => {
@@ -19,9 +21,25 @@ export class LoadScriptService {
         src: script.src
       };
     });
-    this.loadScript('googleMaps').then(() => { console.log("I am loaded in the service"); this.loaded = true; }); 
-    //setTimeout(function () { this.loaded = true; }, 100);
-  //console.log("I am loaded in the service"); this.loaded = true; 
+    //this.loadScript('googleCharts').then(() => {
+    //  console.log("Google Chart Script got attached to body !!!");
+    //  try {
+    //    google.charts.load('current', { 'packages': ['corechart'] }).then(() => {
+    //      this.loaded = true;
+    //      this.google = google;
+    //      console.log("Google Chart packages loaded !!!");
+    //    });
+        
+    //  } catch{
+    //    console.log("could not load the google package !!!!");
+    //  }
+      
+    //}); 
+  }
+
+  returnGoogleVar() {
+    
+    return this.google;
   }
 
   // load a single or multiple scripts
@@ -46,11 +64,21 @@ export class LoadScriptService {
         script.src = this.scripts[name].src;
         // cross browser handling of onLoaded event
         
-          script.onload = () => {
-            this.scripts[name].loaded = true;
-            resolve({ script: name, loaded: true, status: 'Loaded' });
-          };
-        
+        script.onload = () => {
+
+          console.log("Google Chart Script got attached to body !!!", google);
+          this.scripts[name].loaded = true;
+          try {
+            google.charts.load('current', { 'packages': ['corechart'] }).then(() => {
+              this.isScriptLoaded = true;
+              console.log("Google Chart packages loaded !!!", google);
+              resolve({ script: name, loaded: true, status: 'Loaded' });
+            });
+          } catch{
+            reject();
+          }
+        }
+       
         script.onerror = (error: any) => resolve({ script: name, loaded: false, status: 'Loaded' });
         // finally append the script tag in the DOM
         document.getElementsByTagName('head')[0].appendChild(script);

@@ -27,6 +27,7 @@ import { ButtonsComponent } from './reports/charts/buttons/buttons.component';
 import { Pane, ViewChildrenComp } from './view-child/view-child.component';
 import { NpmGoogleChartsComponent } from './reports/charts/npm-google-charts/npm-google-charts.component';
 import { GoogleChartsModule } from 'angular-google-charts';
+import { ServiceLoadCheckComponent } from './reports/charts/service-load-check/service-load-check.component';
 
 
 @NgModule({
@@ -41,7 +42,7 @@ import { GoogleChartsModule } from 'angular-google-charts';
     WidthCheckComponent,
     AppLookComponent,
     ButtonsComponent,
-    ViewChildrenComp, Pane, NpmGoogleChartsComponent,
+    ViewChildrenComp, Pane, NpmGoogleChartsComponent, ServiceLoadCheckComponent,
     
     //CustomersComponent,
    ],

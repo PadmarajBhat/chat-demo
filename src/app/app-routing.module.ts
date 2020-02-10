@@ -11,6 +11,7 @@ import { AppLookComponent } from './app-look/app-look.component';
 import { ButtonsComponent } from './reports/charts/buttons/buttons.component';
 import { ViewChildrenComp } from './view-child/view-child.component';
 import { NpmGoogleChartsComponent } from './reports/charts/npm-google-charts/npm-google-charts.component';
+import { ServiceLoadCheckComponent } from './reports/charts/service-load-check/service-load-check.component';
 
 
 const routes: Routes = [
@@ -28,8 +29,9 @@ const routes: Routes = [
   { path: "app", component: AppLookComponent },
   { path: "buttons", component: ButtonsComponent },
   { path: "child", component: ViewChildrenComp },
-  {path:"charts", component:NpmGoogleChartsComponent},
-
+  { path: "charts", component: NpmGoogleChartsComponent },
+  { path: "service", component: ServiceLoadCheckComponent },
+  
 ]
   
 

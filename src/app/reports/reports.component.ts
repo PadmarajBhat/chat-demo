@@ -3,6 +3,7 @@ import { Component, OnInit, HostListener, ElementRef, ViewChild, Renderer, After
 import { Router } from '@angular/router';
 import { CareerlevelfraudtrendComponent } from './charts/careerlevelfraudtrend/careerlevelfraudtrend.component';
 import { LoadScriptService } from '../load-script.service';
+//import google from 'src/assets/google-chart-loader.js';
 
 declare var google: any;
 @Component({
@@ -18,6 +19,7 @@ export class ReportsComponent implements OnInit, AfterViewInit {
   componentString = `<app-careerlevelfraudtrend > </app-careerlevelfraudtrend>`;
   loadedScript= false;
   constructor() {
+    google.charts.load('current', { 'packages': ['corechart'] });
     //ls
     //  // one or more arguments
     //  .load('googleMaps')
