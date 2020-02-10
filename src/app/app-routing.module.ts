@@ -9,7 +9,8 @@ import { CustomersComponent } from './customers/customers.component';
 import { WidthCheckComponent } from './width-check/width-check.component';
 import { AppLookComponent } from './app-look/app-look.component';
 import { ButtonsComponent } from './reports/charts/buttons/buttons.component';
-
+import { ViewChildrenComp } from './view-child/view-child.component';
+import { NpmGoogleChartsComponent } from './reports/charts/npm-google-charts/npm-google-charts.component';
 
 
 const routes: Routes = [
@@ -25,7 +26,9 @@ const routes: Routes = [
   { path: "customers", component: CustomersComponent },
   { path: "width", component: WidthCheckComponent },
   { path: "app", component: AppLookComponent },
-  {path:"buttons", component:ButtonsComponent},
+  { path: "buttons", component: ButtonsComponent },
+  { path: "child", component: ViewChildrenComp },
+  {path:"charts", component:NpmGoogleChartsComponent},
 
 ]
   

@@ -24,6 +24,10 @@ import { AppLookComponent } from './app-look/app-look.component';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ButtonsComponent } from './reports/charts/buttons/buttons.component';
+import { Pane, ViewChildrenComp } from './view-child/view-child.component';
+import { NpmGoogleChartsComponent } from './reports/charts/npm-google-charts/npm-google-charts.component';
+import { GoogleChartsModule } from 'angular-google-charts';
+
 
 @NgModule({
   declarations: [
@@ -37,6 +41,8 @@ import { ButtonsComponent } from './reports/charts/buttons/buttons.component';
     WidthCheckComponent,
     AppLookComponent,
     ButtonsComponent,
+    ViewChildrenComp, Pane, NpmGoogleChartsComponent,
+    
     //CustomersComponent,
    ],
   imports: [
@@ -50,6 +56,7 @@ import { ButtonsComponent } from './reports/charts/buttons/buttons.component';
     MatButtonModule,
     CustomersModule,
     MatToolbarModule,
+    GoogleChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

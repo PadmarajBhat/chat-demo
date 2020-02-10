@@ -1,0 +1,41 @@
+<p>npm-google-charts works!</p>
+
+
+<google-chart #chart
+              [title]="title"
+              [type]="type"
+              [data]="data"
+              [columnNames]="columnNames"
+              [options]="options"
+              [width]="width"
+              [height]="height">
+</google-chart>
+
+
+<mat-card [ngStyle]="getCareerLevelFraudStyle()">
+
+  <mat-card-header #matCardHeader id="mat-card-header">
+
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>Shiba Inu</mat-card-title>
+    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+
+  </mat-card-header>
+
+  <div  #matCardContent id="mat-card-content" style="flex:1; margin-right:2%">
+    <mat-card-content>
+      <google-chart *ngIf="flag" #chart
+                    [title]="title"
+                    [type]="type"
+                    [data]="data"
+                    [columnNames]="columnNames"
+                    [options]="options"
+                    [width]="width"
+                    [height]="height">
+        <!--[width]="100"-->
+        <!--[height]="100"-->
+      </google-chart>
+    </mat-card-content>
+  </div>
+
+</mat-card>
