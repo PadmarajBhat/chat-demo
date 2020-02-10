@@ -1,19 +1,37 @@
 <mat-sidenav-container>
-    <mat-sidenav #drawer mode="side" opened>
-      <br>
-      <button mat-button [routerLink]="['/']"> Home </button>
-      <br>
-      <button mat-button (click)="drawer.toggle(isBrowser())" color="primary" [routerLink]="['recruitedby']"> recruitedBy </button>
-      <br />
-      <button mat-button (click)="drawer.toggle(isBrowser())" color="primary" [routerLink]="['careerlevel']"> careerLevelTrend </button>
-      <br>
-    </mat-sidenav>
+  <mat-sidenav #drawer mode="side" opened>
+    <br>
+    <button mat-button [routerLink]="['/']"> Home </button>
+    <br>
+    <button mat-button (click)="drawer.toggle(isBrowser()); setLoaded()" color="primary" > recruitedBy </button>
+    <br />
+    <button mat-button (click)="drawer.toggle(isBrowser())" color="primary" [routerLink]="['careerlevel']"> careerLevelTrend </button>
+    <br>
+    <button mat-button (click)="drawer.toggle(isBrowser());moveToCareer2()" color="primary"> careerLevelTrend2 </button>
+    <br>
+  </mat-sidenav>
 
-    <mat-sidenav-content>
-      <div id="myDiv" #mydiv [style.height.px]="getHeight()">
-        <router-outlet></router-outlet>
+  <mat-sidenav #drawer2 position="end" mode="side" opened>
+    <br>
+    <button mat-button [routerLink]="['/']"> Home </button>
+    <br>
+    <button mat-button (click)="drawer2.toggle(isBrowser());setLoaded();" color="primary"> recruitedBy </button>
+    <br />
+    <button mat-button (click)="drawer2.toggle(isBrowser())" color="primary" [routerLink]="['careerlevel']"> careerLevelTrend </button>
+    <br>
+    <button mat-button (click)="drawer2.toggle(isBrowser());moveToCareer2()" color="primary"> careerLevelTrend2 </button>
+    <br>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div id="myDiv" #mydiv [style.height.px]="getHeight()">
+      <app-careerlevelfraudtrend ></app-careerlevelfraudtrend>
       </div>
-    </mat-sidenav-content>
+      <!--<div id="myDiv" #mydiv [style.height.px]="getHeight()">
+      <!--<router-outlet></router-outlet>-->
+      <!--</div>-->
+
+  </mat-sidenav-content>
 
 
 </mat-sidenav-container>

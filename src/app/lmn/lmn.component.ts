@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LmnComponent implements OnInit {
   title = "Chat App";
-  constructor() { console.log("lmn reloading !!!!");}
+  constructor() { console.log("lmn reloading !!!!"); }
 
   ngOnInit() {
   }

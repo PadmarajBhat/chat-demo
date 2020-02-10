@@ -8,11 +8,15 @@ declare var google: any;
 })
 
 export class CareerlevelfraudtrendComponent implements OnInit, AfterViewInit,OnChanges {
-
+  chartId: string = 'pieChart4';
+  isScriptloaded = true;
   @ViewChild("pieChart0", { static: false }) pieChart0: ElementRef;
   @ViewChild("pieChart1", { static: false }) pieChart1: ElementRef;
   @ViewChild("pieChart2", { static: false }) pieChart2: ElementRef;
   @ViewChild("pieChart3", { static: false }) pieChart3: ElementRef;
+  @ViewChild("pieChartCard", { static: false }) pieChartCard: ElementRef;
+  
+  
   //@ViewChildren(ElementRef) charts;
 
   getCareerLevelFraudStyle() {
@@ -21,11 +25,17 @@ export class CareerlevelfraudtrendComponent implements OnInit, AfterViewInit,OnC
       'background-color': 'white',
       'display': 'flex',
       'flex-direction': 'column',
-      'height.px':window.innerHeight*.8
+      'height.px': window.innerHeight * .8,
+      //'width.%':100,
     }
   }
 
-  drawChart = () => {
+  moveToCareer2() {
+    console.log("scrolling");
+    this.pieChart3.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'start' });
+  }
+
+  drawChart(elementToDrawOn:string)  {
 
   const data = google.visualization.arrayToDataTable([
       ['Task', 'Hours per Day'],
@@ -43,22 +53,47 @@ export class CareerlevelfraudtrendComponent implements OnInit, AfterViewInit,OnC
       },
     };
 
-    var chart = new google.visualization.PieChart(document.getElementById("pieChart0"));
-    chart.draw(data, options);
+    var elementLast = document.getElementById(this.chartId);
 
-    var chart = new google.visualization.PieChart(document.getElementById("pieChart1"));
-    chart.draw(data, options);
+    switch (elementToDrawOn) {
+      case "pieChart0": {
+        var chart = new google.visualization.PieChart(document.getElementById("pieChart0"));
+        chart.draw(data, options);
+        break;
+      }
+      case "pieChart1": {
+        var chart = new google.visualization.PieChart(document.getElementById("pieChart1"));
+        chart.draw(data, options);
+        break;
+      }
+      case "pieChart2": {
+        var chart = new google.visualization.PieChart(document.getElementById("pieChart2"));
+        chart.draw(data, options);
+        break;
+      }
+      case "pieChart3": {
+        var chart = new google.visualization.PieChart(document.getElementById("pieChart3"));
+        chart.draw(data, options);
+        break;
+      }
+      default: {
+        //statements;
+        console.log("No expression matched for the switch statement !!!");
+        break;
+      }
+    } 
+    
 
-    var chart = new google.visualization.PieChart(document.getElementById("pieChart2"));
-    chart.draw(data, options);
+    
 
-    var chart = new google.visualization.PieChart(document.getElementById("pieChart3"));
-    chart.draw(data, options);
+    
+
+    
   }
   ngAfterViewInit() {
 
     google.charts.load('current', { 'packages': ['corechart'] });
-    google.charts.setOnLoadCallback(this.drawChart);
+    google.charts.setOnLoadCallback(this.drawChart("pieChart3"));
 
     console.log("what is my screen orientation : ", screen.orientation, screen.orientation.type, screen.orientation.angle);
   }
@@ -67,10 +102,18 @@ export class CareerlevelfraudtrendComponent implements OnInit, AfterViewInit,OnC
   //@HostListener('window:orientationchange', ['$event'])
   @HostListener('window:resize', ['$event'])
   onOrientationChange(event) {
+    this.isScriptloaded = false;
+  
     for (var i = 0; i <= 3; i++) {
-      let myElem = document.getElementById("pieChart"+i);
-      myElem.removeChild(myElem.firstChild);
+      try {
+        let myElem = document.getElementById("pieChart" + i);
+        myElem.removeChild(myElem.firstChild);
+      }
+      catch {
+        console.log("could not delete the children");
+      }
     }
+    
     
     //window.addEventListener('orientationchange', function () {
     //  // After orientationchange, add a one-time resize event
@@ -121,7 +164,8 @@ export class CareerlevelfraudtrendComponent implements OnInit, AfterViewInit,OnC
     
     console.log(window.innerHeight, window.innerWidth, screen.height, screen.width);
     //google.charts.load('current', { 'packages': ['corechart'] });
-    google.charts.setOnLoadCallback(this.drawChart);
+    this.isScriptloaded = true;
+    google.charts.setOnLoadCallback(this.drawChart("pieChart2"));
     console.log("does we have anything in event ? ", event.eventPhase);
   }
 

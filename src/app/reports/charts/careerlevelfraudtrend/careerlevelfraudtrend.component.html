@@ -1,7 +1,7 @@
-<div>
+<div *ngIf="isScriptloaded">
 
-  <button mat-raised-button style="position:sticky;margin:1%;top:0;left:0;right:auto;bottom:auto; z-index:5;" [routerLink]="['/reports']"><<</button>
-
+  <!--<button mat-raised-button style="position:sticky;margin:1%;top:0;left:0;right:auto;bottom:auto; z-index:5;" [routerLink]="['/reports']"><<</button>
+  <button mat-raised (click)="this.moveToCareer2()">goto</button>-->
   <mat-card [ngStyle]="getCareerLevelFraudStyle()">
 
     <mat-card-header>
@@ -47,19 +47,20 @@
 
   </mat-card>
 
-  <mat-card [ngStyle]="getCareerLevelFraudStyle()">
+  <div id="pieChartCard" #pieChartCard>
+    <mat-card [ngStyle]="getCareerLevelFraudStyle()">
 
-    <mat-card-header>
+      <mat-card-header>
 
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>Shiba Inu</mat-card-title>
-      <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>Shiba Inu</mat-card-title>
+        <mat-card-subtitle>Dog Breed</mat-card-subtitle>
 
-    </mat-card-header>
+      </mat-card-header>
 
-    <mat-card-content id="pieChart3" #pieChart3>
-    </mat-card-content>
+      <mat-card-content id="pieChart3" #pieChart3>
+      </mat-card-content>
 
-  </mat-card>
-
+    </mat-card>
+  </div>
 </div>
