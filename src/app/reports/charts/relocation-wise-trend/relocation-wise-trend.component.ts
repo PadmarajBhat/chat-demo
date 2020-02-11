@@ -40,7 +40,7 @@ export class RelocationWiseTrendComponent implements OnInit {
       },
     };
 
-    var chart = new google.visualization.PieChart(this.relocationTrend.nativeElement);
+    var chart = new google.visualization.PieChart(document.getElementById("relocationTrend"));
     chart.draw(data, options);
   }
 
@@ -72,12 +72,20 @@ export class RelocationWiseTrendComponent implements OnInit {
     });
     console.log("ngAfterViewInit should be called only once during the component life cycle");
   }
+  //
 
-  @HostListener('window:resize')
+  @HostListener('window:resize', ['$event, { passive: true }'])
   onOrientationChange() {
     let myElem = document.getElementById("relocationTrend");
-    myElem.removeChild(myElem.firstChild);
-    google.charts.setOnLoadCallback(this.drawChart());
+    try {
+      myElem.removeChild(myElem.firstChild);
+    } catch {
+      console.log("Accidental rare Exceptions !!!");
+    }finally {
+      setTimeout(() => { google.charts.setOnLoadCallback(this.drawChart()); }, 5);
+    }
+    //google.charts.setOnLoadCallback(this.drawChart());
+    //this.ngAfterViewInit()
 
     //this.relocationTrend.nativeElement.removeChild(this.relocationTrend.nativeElement.firstTrend);
   }
