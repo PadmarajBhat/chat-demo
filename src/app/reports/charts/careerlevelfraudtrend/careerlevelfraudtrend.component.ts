@@ -1,5 +1,4 @@
 import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, HostListener, OnChanges, ViewChildren } from '@angular/core';
-import { google }  from 'src/assets/google-chart-loader.js';
 declare var google: any;
 @Component({
   selector: 'app-careerlevelfraudtrend',
