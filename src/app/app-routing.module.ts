@@ -12,6 +12,7 @@ import { ButtonsComponent } from './reports/charts/buttons/buttons.component';
 import { ViewChildrenComp } from './view-child/view-child.component';
 import { NpmGoogleChartsComponent } from './reports/charts/npm-google-charts/npm-google-charts.component';
 import { ServiceLoadCheckComponent } from './reports/charts/service-load-check/service-load-check.component';
+import { RelocationWiseTrendComponent } from './reports/charts/relocation-wise-trend/relocation-wise-trend.component';
 
 
 const routes: Routes = [
@@ -31,7 +32,7 @@ const routes: Routes = [
   { path: "child", component: ViewChildrenComp },
   { path: "charts", component: NpmGoogleChartsComponent },
   { path: "service", component: ServiceLoadCheckComponent },
-  
+  { path: "relocation", component: RelocationWiseTrendComponent },
 ]
   
 

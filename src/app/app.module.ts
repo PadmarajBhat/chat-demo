@@ -28,6 +28,7 @@ import { Pane, ViewChildrenComp } from './view-child/view-child.component';
 import { NpmGoogleChartsComponent } from './reports/charts/npm-google-charts/npm-google-charts.component';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { ServiceLoadCheckComponent } from './reports/charts/service-load-check/service-load-check.component';
+import { RelocationWiseTrendComponent } from './reports/charts/relocation-wise-trend/relocation-wise-trend.component';
 
 
 @NgModule({
@@ -42,7 +43,7 @@ import { ServiceLoadCheckComponent } from './reports/charts/service-load-check/s
     WidthCheckComponent,
     AppLookComponent,
     ButtonsComponent,
-    ViewChildrenComp, Pane, NpmGoogleChartsComponent, ServiceLoadCheckComponent,
+    ViewChildrenComp, Pane, NpmGoogleChartsComponent, ServiceLoadCheckComponent, RelocationWiseTrendComponent,
     
     //CustomersComponent,
    ],
