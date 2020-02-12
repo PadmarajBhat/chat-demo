@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, HostListener, OnDestroy } from '@angular/core';
 import { DataLoaderService } from '../data-loader.service';
 import { LoadScriptService } from '../../../load-script.service';
+import { GoogleChartInterface } from '../google-chart-interface';
 
 declare var google: any;
 
@@ -12,7 +13,7 @@ declare var google: any;
 export class RelocationWiseTrendComponent implements OnInit {
 
   @ViewChild('relocationTrend', { static: false }) relocationTrend: ElementRef;
-  switchOn = true;
+  
   constructor(
     private dl: DataLoaderService,
     private ls: LoadScriptService
@@ -21,27 +22,41 @@ export class RelocationWiseTrendComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  
   drawChart = () => {
 
-    const data = google.visualization.arrayToDataTable([
-      ['Task', 'Hours per Day'],
-      ['Work', 11],
-      ['Eat', 2.7],
-      ['Commute', 2],
-      ['Watch TV', 2],
-      ['Sleep', 7]
-    ]);
-    var options = {
-      title: 'My Daily Activities',
-      animation: {
-        duration: 10000,
-        easing: 'in'
-      },
-    };
+    //const data = google.visualization.arrayToDataTable([
+    //  ['Task', 'Hours per Day'],
+    //  ['Work', 11],
+    //  ['Eat', 2.7],
+    //  ['Commute', 2],
+    //  ['Watch TV', 2],
+    //  ['Sleep', 7]
+    //]);
+    
+    const subscriber = this.dl.getRelocationData();
+    subscriber.subscribe((x: GoogleChartInterface) => {
+      console.log("the subscribed value ",x);
+      const data = google.visualization.arrayToDataTable(x);
 
-    var chart = new google.visualization.PieChart(document.getElementById("relocationTrend"));
-    chart.draw(data, options);
+    
+      var options = {
+        title: 'My Daily Activities',
+        animation: {
+          duration: 10000,
+          easing: 'in'
+        },
+      };
+
+
+      var chart = new google.visualization.PieChart(document.getElementById("relocationTrend"));
+        chart.draw(data, options);
+      
+    },
+      () => { console.log("error occurred in the subscription") },
+      () => { console.log("subscription completed !!!") }
+    );
+    //subscriber.unsubscribe();
   }
 
   getCareerLevelFraudStyle() {
@@ -89,4 +104,6 @@ export class RelocationWiseTrendComponent implements OnInit {
 
     //this.relocationTrend.nativeElement.removeChild(this.relocationTrend.nativeElement.firstTrend);
   }
+
+
 }
