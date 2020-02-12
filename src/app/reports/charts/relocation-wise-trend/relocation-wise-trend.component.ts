@@ -80,7 +80,7 @@ export class RelocationWiseTrendComponent implements OnInit {
     try {
       myElem.removeChild(myElem.firstChild);
     } catch {
-      console.log("Accidental rare Exceptions !!!");
+      console.log("Accidental/Rare Exceptions !!!");
     }finally {
       setTimeout(() => { google.charts.setOnLoadCallback(this.drawChart()); }, 5);
     }
