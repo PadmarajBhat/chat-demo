@@ -14,6 +14,7 @@ import { NpmGoogleChartsComponent } from './reports/charts/npm-google-charts/npm
 import { ServiceLoadCheckComponent } from './reports/charts/service-load-check/service-load-check.component';
 import { RelocationWiseTrendComponent } from './reports/charts/relocation-wise-trend/relocation-wise-trend.component';
 import { ChartListComponent } from './reports/chart-list/chart-list.component';
+import { DashboardComponent } from './reports/dashboard/dashboard.component';
 
 
 const routes: Routes = [
@@ -35,6 +36,7 @@ const routes: Routes = [
   { path: "service", component: ServiceLoadCheckComponent },
   { path: "relocation", component: RelocationWiseTrendComponent },
   { path: "charts", component: ChartListComponent },
+  { path: "dashboard", component: DashboardComponent },
 
 ]
   
