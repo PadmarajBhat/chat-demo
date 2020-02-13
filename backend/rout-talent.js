@@ -3,6 +3,8 @@ const router_talent = express.Router();
 
 const router = require('./route');
 
+const pd = require( 'pandas-js');
+
 router.get('/reports/relocation_data', (req, res, next) => {
   data = [
     ['Task', 'Hours per Day'],
@@ -12,6 +14,7 @@ router.get('/reports/relocation_data', (req, res, next) => {
     ['Watch TV', 2],
     ['Sleep', 7]
   ];
+
   console.log("Data from the server :", data);
   res.json(data);
 });
