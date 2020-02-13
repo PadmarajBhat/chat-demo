@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, HostListener, OnDestroy } from '@angular/core';
 import { DataLoaderService } from '../data-loader.service';
 import { LoadScriptService } from '../../../load-script.service';
-import { GoogleChartInterface } from '../google-chart-interface';
 
 declare var google: any;
 
@@ -22,41 +21,39 @@ export class RelocationWiseTrendComponent implements OnInit {
 
   ngOnInit() {
   }
-  
-  drawChart = () => {
 
-    //const data = google.visualization.arrayToDataTable([
-    //  ['Task', 'Hours per Day'],
-    //  ['Work', 11],
-    //  ['Eat', 2.7],
-    //  ['Commute', 2],
-    //  ['Watch TV', 2],
-    //  ['Sleep', 7]
-    //]);
-    
-    const subscriber = this.dl.getRelocationData();
-    subscriber.subscribe((x: GoogleChartInterface) => {
-      console.log("the subscribed value ",x);
-      const data = google.visualization.arrayToDataTable(x);
+  drawChart(subscriber, idName, chartTitle) {
+    subscriber.subscribe(
+      (x) => {
 
-    
-      var options = {
-        title: 'My Daily Activities',
-        animation: {
-          duration: 10000,
-          easing: 'in'
-        },
-      };
+        console.log("the subscribed value ", x);
+        const data = google.visualization.arrayToDataTable(x);
+        var options = {
+          title: chartTitle,
+        };
 
-
-      var chart = new google.visualization.PieChart(document.getElementById("relocationTrend"));
+        let myElem = document.getElementById(idName);
+        var chart = new google.visualization.PieChart(myElem);
         chart.draw(data, options);
-      
-    },
-      () => { console.log("error occurred in the subscription") },
-      () => { console.log("subscription completed !!!") }
+      },
+
+      (err) => { console.log(idName + " error occurred in the subscription", err) },
+
+      () => { console.log(idName+" subscription completed !!!") }
     );
-    //subscriber.unsubscribe();
+  }
+
+  drawChart2(idName: string) {
+    switch (idName) {
+      case "relocationTrend":
+        const subscriber = this.dl.getRelocationData();
+        this.drawChart(subscriber, idName, "My Daily Activities");
+        break;
+
+      default:
+        console.log(idName + " draw description is yet to be defined");
+    }
+    
   }
 
   getCareerLevelFraudStyle() {
@@ -78,7 +75,7 @@ export class RelocationWiseTrendComponent implements OnInit {
 
           console.log("Google Chart packages loaded at ngAfterViewInit!!!", google);
 
-          google.charts.setOnLoadCallback(this.drawChart());
+          google.charts.setOnLoadCallback(this.drawChart2("relocationTrend"));
         });
       } catch {
         console.log("could not load google packages at ngAfterViewInit");
@@ -97,7 +94,7 @@ export class RelocationWiseTrendComponent implements OnInit {
     } catch {
       console.log("Accidental/Rare Exceptions !!!");
     }finally {
-      setTimeout(() => { google.charts.setOnLoadCallback(this.drawChart()); }, 5);
+      setTimeout(() => { google.charts.setOnLoadCallback(this.drawChart2("relocationTrend")); }, 5);
     }
     //google.charts.setOnLoadCallback(this.drawChart());
     //this.ngAfterViewInit()
