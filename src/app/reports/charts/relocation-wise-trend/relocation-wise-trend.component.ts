@@ -12,6 +12,11 @@ declare var google: any;
 export class RelocationWiseTrendComponent implements OnInit {
 
   @ViewChild('relocationTrend', { static: false }) relocationTrend: ElementRef;
+
+  chartList = [
+    { "chartId": "relocationTrend", "enable": true },
+    { "chartId": "relocationTrend2", "enable": true },
+  ];
   
   constructor(
     private dl: DataLoaderService,
@@ -43,15 +48,28 @@ export class RelocationWiseTrendComponent implements OnInit {
     );
   }
 
-  drawChart2(idName: string) {
+  drawIdChart(idName: string) {
+
     switch (idName) {
+
       case "relocationTrend":
-        const subscriber = this.dl.getRelocationData();
-        this.drawChart(subscriber, idName, "My Daily Activities");
+        this.drawChart(this.dl.getRelocationData(), idName, "My Daily Activities");
+        break;
+
+      case "relocationTrend2":
+        this.drawChart(this.dl.getRelocationData(), idName, "My Tuesday Activities");
         break;
 
       default:
         console.log(idName + " draw description is yet to be defined");
+    }
+    
+  }
+
+  drawAll() {
+
+    for (let id of this.chartList) {
+      this.drawIdChart(id['chartId']);
     }
     
   }
@@ -75,12 +93,11 @@ export class RelocationWiseTrendComponent implements OnInit {
 
           console.log("Google Chart packages loaded at ngAfterViewInit!!!", google);
 
-          google.charts.setOnLoadCallback(this.drawChart2("relocationTrend"));
+          google.charts.setOnLoadCallback(this.drawAll());
         });
       } catch {
         console.log("could not load google packages at ngAfterViewInit");
       }
-
     });
     console.log("ngAfterViewInit should be called only once during the component life cycle");
   }
@@ -88,18 +105,18 @@ export class RelocationWiseTrendComponent implements OnInit {
 
   @HostListener('window:resize', ['$event, { passive: true }'])
   onOrientationChange() {
-    let myElem = document.getElementById("relocationTrend");
-    try {
-      myElem.removeChild(myElem.firstChild);
-    } catch {
-      console.log("Accidental/Rare Exceptions !!!");
-    }finally {
-      setTimeout(() => { google.charts.setOnLoadCallback(this.drawChart2("relocationTrend")); }, 5);
-    }
-    //google.charts.setOnLoadCallback(this.drawChart());
-    //this.ngAfterViewInit()
 
-    //this.relocationTrend.nativeElement.removeChild(this.relocationTrend.nativeElement.firstTrend);
+
+    for (let id of this.chartList) {
+      try {
+        let myElem = document.getElementById(id['chartId']);
+        myElem.removeChild(myElem.firstChild);
+      } catch {
+        console.log("Accidental/Rare Exceptions for ", id['chartId']);
+      }
+    } 
+    setTimeout(() => { google.charts.setOnLoadCallback(this.drawAll()); }, 5);
+
   }
 
 
