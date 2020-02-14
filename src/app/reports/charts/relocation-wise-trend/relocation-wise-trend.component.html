@@ -1,15 +1,15 @@
-<div *ngFor="let id of chartList">
+<div *ngFor="let id of this.getIdList()">
   <mat-card [ngStyle]="getCareerLevelFraudStyle()">
 
     <mat-card-header>
 
       <div mat-card-avatar class="example-header-image"></div>
       <mat-card-title>Shiba Inu</mat-card-title>
-      <mat-card-subtitle>{{id.chartId}}</mat-card-subtitle>
+      <mat-card-subtitle>{{id}}</mat-card-subtitle>
 
     </mat-card-header>
 
-    <mat-card-content [ngStyle]="{'flex':1}" attr.id={{id.chartId}} #relocationTrend>
+    <mat-card-content [ngStyle]="{'flex':1}" attr.id={{id}} #relocationTrend>
     </mat-card-content>
 
   </mat-card>
