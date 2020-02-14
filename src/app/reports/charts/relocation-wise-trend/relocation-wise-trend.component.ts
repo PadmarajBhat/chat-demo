@@ -48,7 +48,10 @@ export class RelocationWiseTrendComponent implements OnInit {
     );
   }
 
-  drawIdChart(idName: string) {
+  drawIdChart(idName: string, func : () => any) {
+
+    console.log("executing dummy");
+    func();
 
     switch (idName) {
 
@@ -69,7 +72,7 @@ export class RelocationWiseTrendComponent implements OnInit {
   drawAll() {
 
     for (let id of this.chartList) {
-      this.drawIdChart(id['chartId']);
+      this.drawIdChart(id['chartId'], () => { console.log("I am a dummy function") });
     }
     
   }
@@ -101,7 +104,6 @@ export class RelocationWiseTrendComponent implements OnInit {
     });
     console.log("ngAfterViewInit should be called only once during the component life cycle");
   }
-  //
 
   @HostListener('window:resize', ['$event, { passive: true }'])
   onOrientationChange() {
