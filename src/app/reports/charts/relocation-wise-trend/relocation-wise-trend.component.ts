@@ -3,6 +3,7 @@ import { DataLoaderService } from '../data-loader.service';
 import { LoadScriptService } from '../../../load-script.service';
 
 declare var google: any;
+declare var googler: any;
 
 @Component({
   selector: 'app-relocation-wise-trend',
@@ -50,7 +51,7 @@ export class RelocationWiseTrendComponent implements OnInit {
 
   drawIdChart(idName: string, func : () => any) {
 
-    console.log("executing dummy");
+    console.log("executing dummy", window['googler']);
     func();
 
     switch (idName) {
