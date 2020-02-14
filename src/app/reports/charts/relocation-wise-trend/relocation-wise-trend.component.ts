@@ -14,10 +14,6 @@ export class RelocationWiseTrendComponent implements OnInit {
 
   @ViewChild('relocationTrend', { static: false }) relocationTrend: ElementRef;
 
-  chartList = [
-    { "chartId": "relocationTrend", "enable": true },
-    { "chartId": "relocationTrend2", "enable": true },
-  ];
   
   constructor(
     private dl: DataLoaderService,
@@ -28,14 +24,15 @@ export class RelocationWiseTrendComponent implements OnInit {
   ngOnInit() {
   }
 
-  drawChart(subscriber, idName, chartTitle) {
+  drawChart(idName) {
+    let subscriber = this.dl.getIdData(idName);
     subscriber.subscribe(
       (x) => {
 
         console.log("the subscribed value ", x);
         const data = google.visualization.arrayToDataTable(x);
         var options = {
-          title: chartTitle,
+          title: this.dl.chartList[idName].title,
         };
 
         let myElem = document.getElementById(idName);
@@ -49,31 +46,10 @@ export class RelocationWiseTrendComponent implements OnInit {
     );
   }
 
-  drawIdChart(idName: string, func : () => any) {
-
-    console.log("executing dummy", window['googler']);
-    func();
-
-    switch (idName) {
-
-      case "relocationTrend":
-        this.drawChart(this.dl.getRelocationData(), idName, "My Daily Activities");
-        break;
-
-      case "relocationTrend2":
-        this.drawChart(this.dl.getRelocationData(), idName, "My Tuesday Activities");
-        break;
-
-      default:
-        console.log(idName + " draw description is yet to be defined");
-    }
-    
-  }
-
   drawAll() {
 
-    for (let id of this.chartList) {
-      this.drawIdChart(id['chartId'], () => { console.log("I am a dummy function") });
+    for (let id of Object.keys(this.dl.chartList)) {
+      this.drawChart(id);
     }
     
   }
@@ -86,6 +62,10 @@ export class RelocationWiseTrendComponent implements OnInit {
       'flex-direction': 'column',
       'height.px': window.innerHeight * .8,
     }
+  }
+
+  getIdList() {
+    return Object.keys(this.dl.chartList);
   }
 
   ngAfterViewInit() {
@@ -110,12 +90,12 @@ export class RelocationWiseTrendComponent implements OnInit {
   onOrientationChange() {
 
 
-    for (let id of this.chartList) {
+    for (let id of Object.keys(this.dl.chartList)) {
       try {
-        let myElem = document.getElementById(id['chartId']);
+        let myElem = document.getElementById(id);
         myElem.removeChild(myElem.firstChild);
       } catch {
-        console.log("Accidental/Rare Exceptions for ", id['chartId']);
+        console.log("Accidental/Rare Exceptions for ", id);
       }
     } 
     setTimeout(() => { google.charts.setOnLoadCallback(this.drawAll()); }, 5);
