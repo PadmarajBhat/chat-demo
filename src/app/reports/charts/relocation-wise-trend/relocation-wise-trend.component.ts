@@ -1,9 +1,26 @@
-import { Component, OnInit, ViewChild, ElementRef, HostListener, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, HostListener, OnDestroy, NgZone } from '@angular/core';
+import { MatSnackBar } from '@angular/material';
 import { DataLoaderService } from '../data-loader.service';
 import { LoadScriptService } from '../../../load-script.service';
+import { SnackbarSuccessComponent } from '../snackbar-success/snackbar-success.component';
+
+
 
 declare var google: any;
 declare var googler: any;
+
+@Component({
+  selector: 'snack-bar-component-example-snack',
+  styles: [`
+
+    .example-pizza-party {
+      color: hotpink;
+    }
+  `],
+  template: `<span style="background-color:green"> Hello </span>`
+
+})
+export class PizzaPartyComponent { }
 
 @Component({
   selector: 'app-relocation-wise-trend',
@@ -17,7 +34,9 @@ export class RelocationWiseTrendComponent implements OnInit {
   
   constructor(
     private dl: DataLoaderService,
-    private ls: LoadScriptService
+    private ls: LoadScriptService,
+    private _sb: MatSnackBar,
+    private zone: NgZone,
   ) { }
 
 
@@ -52,6 +71,26 @@ export class RelocationWiseTrendComponent implements OnInit {
       this.drawChart(id);
     }
     
+  }
+
+  checkSelected(idName: string) {
+    return this.dl.chartList[idName].enable;
+  }
+
+  clickedMe(idName: string, add: boolean) {
+    //this.dl.chartList[idName].enable = !this.dl.chartList[idName].enable;
+    this.dl.setEnableId(idName);
+
+    
+    if (add) {
+      //this.zone.run(() => {
+      this._sb.openFromComponent(SnackbarSuccessComponent,  { duration: 3000, verticalPosition: 'top', horizontalPosition: 'center' });
+      //this._sb.open(idName + " added to Dashboard", null, { duration: 3000, verticalPosition: 'top'});//, "Undo",{ duration: 3000, verticalPosition: 'top', horizontalPosition: 'center' });
+      //});
+    } else {
+      //this._sb.openFromComponent(SnackbarSuccessComponent, { duration: 3000, verticalPosition: 'top', horizontalPosition: 'center' });
+      this._sb.open(idName + " removed from Dashboard", null, { duration: 3000, verticalPosition: 'top'});
+    }
   }
 
   getCareerLevelFraudStyle() {
@@ -104,3 +143,6 @@ export class RelocationWiseTrendComponent implements OnInit {
 
 
 }
+
+
+
