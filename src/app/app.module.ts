@@ -15,7 +15,7 @@ import { MatCommonModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule } from '@angular/material/button';
+import { MatButtonModule, MatIconModule, MatSnackBarModule } from '@angular/material';
 
 import { HttpClientModule } from '@angular/common/http';
 import { CustomersModule } from './customers/customers.module';
@@ -28,10 +28,10 @@ import { Pane, ViewChildrenComp } from './view-child/view-child.component';
 import { NpmGoogleChartsComponent } from './reports/charts/npm-google-charts/npm-google-charts.component';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { ServiceLoadCheckComponent } from './reports/charts/service-load-check/service-load-check.component';
-import { RelocationWiseTrendComponent } from './reports/charts/relocation-wise-trend/relocation-wise-trend.component';
+import { RelocationWiseTrendComponent, PizzaPartyComponent } from './reports/charts/relocation-wise-trend/relocation-wise-trend.component';
 import { ChartListComponent } from './reports/chart-list/chart-list.component';
 import { DashboardComponent } from './reports/dashboard/dashboard.component';
-
+import { SnackbarSuccessComponent } from './reports/charts/snackbar-success/snackbar-success.component';
 
 @NgModule({
   declarations: [
@@ -45,9 +45,15 @@ import { DashboardComponent } from './reports/dashboard/dashboard.component';
     WidthCheckComponent,
     AppLookComponent,
     ButtonsComponent,
-    ViewChildrenComp, Pane, NpmGoogleChartsComponent, ServiceLoadCheckComponent, RelocationWiseTrendComponent, ChartListComponent, DashboardComponent,
-    
-    //CustomersComponent,
+    ViewChildrenComp,
+    Pane,
+    NpmGoogleChartsComponent,
+    ServiceLoadCheckComponent,
+    RelocationWiseTrendComponent,
+    ChartListComponent,
+    DashboardComponent,
+    PizzaPartyComponent,
+    SnackbarSuccessComponent,
    ],
   imports: [
     BrowserModule,
@@ -58,11 +64,14 @@ import { DashboardComponent } from './reports/dashboard/dashboard.component';
     MatCommonModule,
     HttpClientModule,
     MatButtonModule,
+    MatIconModule,
+    MatSnackBarModule,
     CustomersModule,
     MatToolbarModule,
     GoogleChartsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [PizzaPartyComponent, SnackbarSuccessComponent]
 })
 export class AppModule { }
