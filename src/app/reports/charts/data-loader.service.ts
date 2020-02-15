@@ -3,32 +3,25 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { GoogleChartInterface } from './google-chart-interface';
 
-declare var googler: any;
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataLoaderService {
 
+  chartList = {
+    "relocationTrend": { "enable": false, "title": "My Daily Activities", "url": 'http://127.0.0.1:8282/reports/relocation_data' },
+    "relocationTrend2": { "enable": false, "title": "My Tuesday Activities", "url": 'http://127.0.0.1:8282/reports/relocation_data' },
+    "relocationTrend3": { "enable": false, "title": "My Wednusday Activities", "url": 'http://127.0.0.1:8282/reports/relocation_data' },
+  };
+
   constructor(private http: HttpClient) { }
 
-  getRelocationData() {
-    window['googler'] = 50;
-    //return new Observable((observer) => {
-    //  observer.next(
-    //    [
-    //      ['Task', 'Hours per Day'],
-    //      ['Work', 11],
-    //      ['Eat', 2.7],
-    //      ['Commute', 2],
-    //      ['Watch TV', 2],
-    //      ['Sleep', 7]
-    //    ]
-    //  );
-    //  observer.complete();
-    //});
+  getIdData(idName: string) {
+    return this.http.get(this.chartList[idName].url);
+  }
 
-    //return this.http.get("http://localhost:3000/reports/relocation_data");
-    return this.http.get <string>("http://127.0.0.1:8282/reports/relocation_data");
+  setEnableId(idName: string) {
+    this.chartList[idName].enable = !this.chartList[idName].enable;
   }
 }
