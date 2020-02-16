@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { XyzComponent } from './xyz/xyz.component';
-import { ReportsComponent } from './reports/reports.component';
+//import { ReportsComponent } from './reports/reports.component';
 import { CareerlevelfraudtrendComponent } from './reports/charts/careerlevelfraudtrend/careerlevelfraudtrend.component';
 import { RecruitedbyComponent } from './reports/charts/recruitedby/recruitedby.component';
 import { LmnComponent } from './lmn/lmn.component';
@@ -14,7 +14,14 @@ import { NpmGoogleChartsComponent } from './reports/charts/npm-google-charts/npm
 import { ServiceLoadCheckComponent } from './reports/charts/service-load-check/service-load-check.component';
 import { RelocationWiseTrendComponent } from './reports/charts/relocation-wise-trend/relocation-wise-trend.component';
 import { ChartListComponent } from './reports/chart-list/chart-list.component';
-import { DashboardComponent } from './reports/dashboard/dashboard.component';
+//import { DashboardComponent } from './reports/dashboard/dashboard.component';
+import { HomeComponent } from './root/home/home.component';
+import { UploadComponent } from './root/upload/upload.component';
+import { AnalysisComponent } from './root/analysis/analysis.component';
+import { DashboardComponent } from './root/reports/dashboard/dashboard.component';
+import { ChartsComponent } from './root/reports/charts/charts.component';
+import { RootComponent } from './root/root.component';
+import { ReportsComponent } from './root/reports/reports.component';
 
 
 const routes: Routes = [
@@ -37,6 +44,23 @@ const routes: Routes = [
   { path: "relocation", component: RelocationWiseTrendComponent },
   { path: "charts", component: ChartListComponent },
   { path: "dashboard", component: DashboardComponent },
+  {
+    path: "root", component: RootComponent,
+    children: [
+      { path: "home", component: HomeComponent },
+      { path: "upload", component: UploadComponent },
+      { path: "analysis", component: AnalysisComponent },
+      {
+        path: "reports", component: ReportsComponent,
+        children: [
+          { path: "dashboard", component: DashboardComponent },
+          { path: "charts", component: ChartsComponent },
+        ]
+
+      }
+    ]
+
+  }
 
 ]
   
