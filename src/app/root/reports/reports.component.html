@@ -1,0 +1,22 @@
+<mat-drawer-container>
+  
+  <mat-drawer mode="side" opened>
+    <button id="dashboard" (click)="setDashboard(true)" mat-button [routerLink]="['dashboard']">Dashboard</button><br />
+    <button id="charts" (click)="setDashboard(false)"  mat-button [routerLink]="['charts']">Charts</button>
+  </mat-drawer>
+  <mat-drawer-content>
+    <!---->
+    <div [style.height.px]="getReportMainHeight()">
+      <router-outlet>
+
+      </router-outlet>
+    </div>
+
+  </mat-drawer-content>
+  
+  <mat-drawer mode="side" position="end" opened>
+    <app-side-end-draw [dashboard]="getDashboard()" [dl]="getDl()"></app-side-end-draw>
+  </mat-drawer>
+
+
+</mat-drawer-container>

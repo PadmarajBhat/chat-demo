@@ -1,0 +1,21 @@
+<div *ngFor="let id of this.getIdList()">
+  <mat-card [ngStyle]="getCareerLevelFraudStyle()">
+
+    <mat-card-header>
+
+
+      <mat-card-title>Shiba Inu</mat-card-title>
+      <mat-card-subtitle>{{id}}</mat-card-subtitle>
+      <button *ngIf="!checkSelected(id)" (click)="clickedMe(id,true);" mat-icon-button style="right:0;position:absolute">
+        <mat-icon>playlist_add</mat-icon>
+      </button>
+      <button *ngIf="checkSelected(id)" (click)="clickedMe(id,false)" mat-icon-button style="color:darkgreen;right:0;position:absolute"><mat-icon>playlist_add_check</mat-icon></button>
+    </mat-card-header>
+
+    <mat-card-content [ngStyle]="{'flex':1}" attr.id={{id}} #relocationTrend>
+    </mat-card-content>
+
+  </mat-card>
+</div>
+
+
