@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { XyzComponent } from './xyz/xyz.component';
 import { AbcdComponent } from './abcd/abcd.component';
 import { LmnComponent } from './lmn/lmn.component';
-import { ReportsComponent } from './reports/reports.component';
+//import { ReportsComponent } from './reports/reports.component';
 import { CareerlevelfraudtrendComponent } from './reports/charts/careerlevelfraudtrend/careerlevelfraudtrend.component';
 import { RecruitedbyComponent } from './reports/charts/recruitedby/recruitedby.component';
 //import { CustomersComponent } from './customers/customers.component';
@@ -30,8 +30,16 @@ import { GoogleChartsModule } from 'angular-google-charts';
 import { ServiceLoadCheckComponent } from './reports/charts/service-load-check/service-load-check.component';
 import { RelocationWiseTrendComponent, PizzaPartyComponent } from './reports/charts/relocation-wise-trend/relocation-wise-trend.component';
 import { ChartListComponent } from './reports/chart-list/chart-list.component';
-import { DashboardComponent } from './reports/dashboard/dashboard.component';
+//import { DashboardComponent } from './reports/dashboard/dashboard.component';
 import { SnackbarSuccessComponent } from './reports/charts/snackbar-success/snackbar-success.component';
+import { RootComponent } from './root/root.component';
+import { HomeComponent } from './root/home/home.component';
+import { UploadComponent } from './root/upload/upload.component';
+import { AnalysisComponent } from './root/analysis/analysis.component';
+import { ChartsComponent } from './root/reports/charts/charts.component';
+import { DashboardComponent } from './root/reports/dashboard/dashboard.component';
+import { ReportsComponent } from './root/reports/reports.component';
+import { SideEndDrawComponent } from './root/reports/report-ui/side-end-draw/side-end-draw.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +62,13 @@ import { SnackbarSuccessComponent } from './reports/charts/snackbar-success/snac
     DashboardComponent,
     PizzaPartyComponent,
     SnackbarSuccessComponent,
+    RootComponent,
+    HomeComponent,
+    UploadComponent,
+    AnalysisComponent,
+    ChartsComponent,
+    SideEndDrawComponent,
+    
    ],
   imports: [
     BrowserModule,
