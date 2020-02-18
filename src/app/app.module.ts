@@ -40,6 +40,7 @@ import { ChartsComponent } from './root/reports/charts/charts.component';
 import { DashboardComponent } from './root/reports/dashboard/dashboard.component';
 import { ReportsComponent } from './root/reports/reports.component';
 import { SideEndDrawComponent } from './root/reports/report-ui/side-end-draw/side-end-draw.component';
+import { ScrollCheckComponent } from './scroll-check/scroll-check.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { SideEndDrawComponent } from './root/reports/report-ui/side-end-draw/sid
     AnalysisComponent,
     ChartsComponent,
     SideEndDrawComponent,
+    ScrollCheckComponent,
     
    ],
   imports: [
