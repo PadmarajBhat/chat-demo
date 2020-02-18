@@ -7,6 +7,8 @@ import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
   styleUrls: ['./scroll-check.component.css']
 })
 export class ScrollCheckComponent implements OnInit {
+
+  listItems = ["abcd", "xyz", "lmn", "ooo"];
   @ViewChild(CdkVirtualScrollViewport, { static: false })
   viewport: CdkVirtualScrollViewport;
 
