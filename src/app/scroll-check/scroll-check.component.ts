@@ -17,4 +17,8 @@ export class ScrollCheckComponent implements OnInit {
   ngOnInit() {
   }
 
+  scrolled() {
+    console.log(this.viewport.measureScrollOffset());
+  }
+
 }
