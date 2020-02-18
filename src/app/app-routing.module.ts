@@ -22,6 +22,7 @@ import { DashboardComponent } from './root/reports/dashboard/dashboard.component
 import { ChartsComponent } from './root/reports/charts/charts.component';
 import { RootComponent } from './root/root.component';
 import { ReportsComponent } from './root/reports/reports.component';
+import { ScrollCheckComponent } from './scroll-check/scroll-check.component';
 
 
 const routes: Routes = [
@@ -60,7 +61,8 @@ const routes: Routes = [
       }
     ]
 
-  }
+  },
+  {path:"scroll",component:ScrollCheckComponent}
 
 ]
   

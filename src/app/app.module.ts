@@ -16,6 +16,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatIconModule, MatSnackBarModule } from '@angular/material';
+import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 
 import { HttpClientModule } from '@angular/common/http';
 import { CustomersModule } from './customers/customers.module';
@@ -86,6 +87,7 @@ import { ScrollCheckComponent } from './scroll-check/scroll-check.component';
     CustomersModule,
     MatToolbarModule,
     GoogleChartsModule,
+    ScrollDispatchModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

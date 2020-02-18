@@ -1,1 +1,10 @@
-<p>scroll-check works!</p>
+  <cdk-virtual-scroll-viewport itemSize="100">
+
+    <div *cdkVirtualFor="let p of listItems">
+      
+        <p> {{ p }} </p>
+      
+    </div>
+
+  </cdk-virtual-scroll-viewport>
+
