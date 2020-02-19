@@ -2,7 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const router = require('./route');
+const router = require('./rout-talent');
+//const router = require('./route');
+
 
 
 //db connection
@@ -24,7 +26,9 @@ app.use(cors());
 
 app.use(bodyParser.json());
 
+//app.use("/reports", router_talent);
 app.use("/", router);
+
 
 
 app.listen(PORT, () => {
