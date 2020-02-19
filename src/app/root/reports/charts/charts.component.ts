@@ -2,6 +2,9 @@ import { Component, OnInit, ViewChild, ElementRef, HostListener } from '@angular
 import { DataLoaderService } from '../../../reports/charts/data-loader.service';
 import { LoadScriptService } from '../../../load-script.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
+import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
+//import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
 
 declare var google: any;
 
@@ -13,12 +16,16 @@ declare var google: any;
 export class ChartsComponent implements OnInit {
   @ViewChild('relocationTrend', { static: false }) relocationTrend: ElementRef;
 
+  @ViewChild(CdkVirtualScrollViewport, { static: false })
+  viewport: CdkVirtualScrollViewport;
+
+  lastScrolledOffset: number = 0;
 
   constructor(
     private dl: DataLoaderService,
     private ls: LoadScriptService,
     private _sb: MatSnackBar,
-
+    private _bottomSheet: MatBottomSheet,
   ) { }
 
 
@@ -123,5 +130,43 @@ export class ChartsComponent implements OnInit {
 
   }
 
+  scrolled() {
+    let offsetDeviation = this.lastScrolledOffset - this.viewport.measureScrollOffset();
 
+    if (Math.abs(offsetDeviation) > 25) {
+      console.log(offsetDeviation);
+      this._bottomSheet.open(BottomSheetOverviewExampleSheet);
+      
+    }
+    
+    this.lastScrolledOffset = this.viewport.measureScrollOffset()
+  }
+
+
+}
+
+
+@Component({
+  selector: 'bottom-sheet-overview-example-sheet',
+  templateUrl: 'bottom-sheet.html',
+})
+export class BottomSheetOverviewExampleSheet {
+  constructor(private _bottomSheetRef: MatBottomSheetRef<BottomSheetOverviewExampleSheet>,
+    private dl: DataLoaderService
+  ) { }
+
+  openLink(event: MouseEvent): void {
+    this._bottomSheetRef.dismiss();
+    event.preventDefault();
+  }
+
+  getChartIds() {
+        var tempList = new Array();
+        for (let id of Object.keys(this.dl.chartList)) {
+          if (this.dl.chartList[id].enable) {
+            tempList.push(id)
+          }
+        }
+        return tempList;
+  }
 }

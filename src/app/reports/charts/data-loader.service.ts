@@ -9,10 +9,12 @@ import { GoogleChartInterface } from './google-chart-interface';
 })
 export class DataLoaderService {
 
+  baseUrl = 'http://127.0.0.1:8282/reports/getTrendData?TrendName='
+
   chartList = {
-    "relocationTrend": { "enable": false, "title": "My Daily Activities", "url": 'http://127.0.0.1:8282/reports/relocation_data' },
-    "relocationTrend2": { "enable": false, "title": "My Tuesday Activities", "url": 'http://127.0.0.1:8282/reports/relocation_data' },
-    "relocationTrend3": { "enable": false, "title": "My Wednusday Activities", "url": 'http://127.0.0.1:8282/reports/relocation_data' },
+    "relocationTrend": { "enable": false, "title": "My Daily Activities", "url": 'http://127.0.0.1:8282/reports/relocationTrendData' },
+    "relocationTrend2": { "enable": false, "title": "My Tuesday Activities", "url": 'http://127.0.0.1:8282/reports/skillLevelTrendData' },
+    "relocationTrend3": { "enable": false, "title": "My Wednusday Activities", "url": this.baseUrl+'reloc_required' },
   };
 
   constructor(private http: HttpClient) { }

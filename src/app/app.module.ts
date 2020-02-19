@@ -16,6 +16,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatIconModule, MatSnackBarModule } from '@angular/material';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 
 import { HttpClientModule } from '@angular/common/http';
@@ -88,8 +89,10 @@ import { ScrollCheckComponent } from './scroll-check/scroll-check.component';
     MatToolbarModule,
     GoogleChartsModule,
     ScrollDispatchModule,
+    MatDialogModule,
   ],
-  providers: [],
+  providers: [{ provide: MatDialogRef, useValue: {} },
+    { provide: MAT_DIALOG_DATA, useValue: [] },],
   bootstrap: [AppComponent],
   entryComponents: [PizzaPartyComponent, SnackbarSuccessComponent]
 })
