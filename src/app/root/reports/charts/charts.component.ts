@@ -31,7 +31,7 @@ export class ChartsComponent implements OnInit {
       (x) => {
 
         console.log("the subscribed value ", x);
-        const data = google.visualization.arrayToDataTable(x);
+        const data = google.visualization.arrayToDataTable(x['data']);
         var options = {
           title: this.dl.chartList[idName].title,
         };
