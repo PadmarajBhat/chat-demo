@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild, ElementRef, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, HostListener, Input } from '@angular/core';
 import { DataLoaderService } from '../../../reports/charts/data-loader.service';
 import { LoadScriptService } from '../../../load-script.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
-import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
+import { MatBottomSheet, MatBottomSheetRef, MatBottomSheetConfig } from '@angular/material';
 //import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
 
 declare var google: any;
@@ -139,10 +139,13 @@ export class ChartsComponent implements OnInit {
   scrolled() {
     let offsetDeviation = this.lastScrolledOffset - this.viewport.measureScrollOffset();
 
-    if (Math.abs(offsetDeviation) > 25 && !this.bottomSheetIsOpen) {
+    if (Math.abs(offsetDeviation) > 100 && !this.bottomSheetIsOpen) {
       this.bottomSheetIsOpen = true
       console.log(offsetDeviation);
-      this._bottomSheet.open(BottomSheetOverviewExampleSheet);
+      let config: MatBottomSheetConfig = new MatBottomSheetConfig();
+      config.data = {'enable':true}
+      this._bottomSheet.open(BottomSheetOverviewExampleSheet, config);
+      
       let observer = this._bottomSheet._openedBottomSheetRef.afterDismissed();
       observer.subscribe(() => { }, () => { }, () => { console.log("BottomSheet Closed"); this.bottomSheetIsOpen = false });
     }
@@ -160,7 +163,10 @@ export class ChartsComponent implements OnInit {
   templateUrl: 'bottom-sheet.html',
 })
 export class BottomSheetOverviewExampleSheet {
-  constructor(private _bottomSheetRef: MatBottomSheetRef<BottomSheetOverviewExampleSheet>,
+
+  @Input() myParentData;
+  constructor(
+    private _bottomSheetRef: MatBottomSheetRef<BottomSheetOverviewExampleSheet>,
     private dl: DataLoaderService
   ) { }
 
@@ -169,19 +175,14 @@ export class BottomSheetOverviewExampleSheet {
     //event.preventDefault();
   }
 
- getChartIds() {
-        var tempList = new Array();
-        for (let id of Object.keys(this.dl.chartList)) {
-          if (!this.dl.chartList[id].enable) {
-            tempList.push(id)
-          }
-        }
-        return tempList;
+  getChartIds() {
+    return this.dl.chartList.getIds();
   }
   moveToId(id: string) {
-    console.log("scrolling");
-    let myElem = document.getElementById(id);
-    myElem.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'start' });
+    console.log("scrolling",this.myParentData);
+    let myElem = document.getElementById(id+"_card");
+    myElem.scrollIntoView({ behavior: 'auto', block: 'start', inline: 'center' });
     console.log("smooth scrolling done");
+    this._bottomSheetRef.dismiss();
   }
 }

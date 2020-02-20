@@ -42,6 +42,7 @@ import { DashboardComponent } from './root/reports/dashboard/dashboard.component
 import { ReportsComponent } from './root/reports/reports.component';
 import { SideEndDrawComponent } from './root/reports/report-ui/side-end-draw/side-end-draw.component';
 import { ScrollCheckComponent } from './scroll-check/scroll-check.component';
+import { ChartList } from './root/reports/ChartList';
 
 @NgModule({
   declarations: [
