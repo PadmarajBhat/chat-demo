@@ -3,7 +3,7 @@ import { DataLoaderService } from '../../../reports/charts/data-loader.service';
 import { LoadScriptService } from '../../../load-script.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
-import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
+import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
 //import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
 
 declare var google: any;
@@ -20,6 +20,7 @@ export class ChartsComponent implements OnInit {
   viewport: CdkVirtualScrollViewport;
 
   lastScrolledOffset: number = 0;
+  bottomSheetIsOpen: boolean = false;
 
   constructor(
     private dl: DataLoaderService,
@@ -39,9 +40,11 @@ export class ChartsComponent implements OnInit {
 
         console.log("the subscribed value ", x);
         const data = google.visualization.arrayToDataTable(x['data']);
-        var options = {
-          title: this.dl.chartList[idName].title,
-        };
+        //var options = {
+        //  title: this.dl.chartList[idName].title,
+        //};
+
+        var options = {};
 
         let myElem = document.getElementById(idName);
         var chart = new google.visualization.PieChart(myElem);
@@ -56,19 +59,22 @@ export class ChartsComponent implements OnInit {
 
   drawAll() {
 
-    for (let id of Object.keys(this.dl.chartList)) {
-      this.drawChart(id);
-    }
+    //for (let id of Object.keys(this.dl.chartList)) {
+    //  this.drawChart(id);
+    //}
 
+    for (let item of this.dl.chartList.getChartList()) {
+      this.drawChart(item['id']);
+    }
   }
 
   checkSelected(idName: string) {
-    return this.dl.chartList[idName].enable;
+    return this.dl.chartList.getIdEnable(idName);
   }
 
   clickedMe(idName: string, add: boolean) {
     //this.dl.chartList[idName].enable = !this.dl.chartList[idName].enable;
-    this.dl.setEnableId(idName);
+    this.dl.chartList.setIdEnable(idName);
 
 
     if (add) {
@@ -93,7 +99,7 @@ export class ChartsComponent implements OnInit {
   }
 
   getIdList() {
-    return Object.keys(this.dl.chartList);
+    return Object.keys(this.dl.chartList.getChartList());
   }
 
   ngAfterViewInit() {
@@ -118,7 +124,7 @@ export class ChartsComponent implements OnInit {
   onOrientationChange() {
 
 
-    for (let id of Object.keys(this.dl.chartList)) {
+    for (let id of Object.keys(this.dl.chartList.getChartList())) {
       try {
         let myElem = document.getElementById(id);
         myElem.removeChild(myElem.firstChild);
@@ -133,13 +139,16 @@ export class ChartsComponent implements OnInit {
   scrolled() {
     let offsetDeviation = this.lastScrolledOffset - this.viewport.measureScrollOffset();
 
-    if (Math.abs(offsetDeviation) > 25) {
+    if (Math.abs(offsetDeviation) > 25 && !this.bottomSheetIsOpen) {
+      this.bottomSheetIsOpen = true
       console.log(offsetDeviation);
       this._bottomSheet.open(BottomSheetOverviewExampleSheet);
-      
+      let observer = this._bottomSheet._openedBottomSheetRef.afterDismissed();
+      observer.subscribe(() => { }, () => { }, () => { console.log("BottomSheet Closed"); this.bottomSheetIsOpen = false });
     }
     
-    this.lastScrolledOffset = this.viewport.measureScrollOffset()
+    this.lastScrolledOffset = this.viewport.measureScrollOffset();
+    //console.log("lastScrolledOffset saved"); 
   }
 
 
@@ -157,16 +166,22 @@ export class BottomSheetOverviewExampleSheet {
 
   openLink(event: MouseEvent): void {
     this._bottomSheetRef.dismiss();
-    event.preventDefault();
+    //event.preventDefault();
   }
 
-  getChartIds() {
+ getChartIds() {
         var tempList = new Array();
         for (let id of Object.keys(this.dl.chartList)) {
-          if (this.dl.chartList[id].enable) {
+          if (!this.dl.chartList[id].enable) {
             tempList.push(id)
           }
         }
         return tempList;
+  }
+  moveToId(id: string) {
+    console.log("scrolling");
+    let myElem = document.getElementById(id);
+    myElem.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'start' });
+    console.log("smooth scrolling done");
   }
 }
