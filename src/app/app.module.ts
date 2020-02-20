@@ -15,8 +15,7 @@ import { MatCommonModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatIconModule, MatSnackBarModule } from '@angular/material';
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatButtonModule, MatIconModule, MatSnackBarModule, MatBottomSheetModule } from '@angular/material';
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 
 import { HttpClientModule } from '@angular/common/http';
@@ -38,7 +37,7 @@ import { RootComponent } from './root/root.component';
 import { HomeComponent } from './root/home/home.component';
 import { UploadComponent } from './root/upload/upload.component';
 import { AnalysisComponent } from './root/analysis/analysis.component';
-import { ChartsComponent } from './root/reports/charts/charts.component';
+import { ChartsComponent, BottomSheetOverviewExampleSheet } from './root/reports/charts/charts.component';
 import { DashboardComponent } from './root/reports/dashboard/dashboard.component';
 import { ReportsComponent } from './root/reports/reports.component';
 import { SideEndDrawComponent } from './root/reports/report-ui/side-end-draw/side-end-draw.component';
@@ -72,7 +71,7 @@ import { ScrollCheckComponent } from './scroll-check/scroll-check.component';
     ChartsComponent,
     SideEndDrawComponent,
     ScrollCheckComponent,
-    
+    BottomSheetOverviewExampleSheet,
    ],
   imports: [
     BrowserModule,
@@ -89,11 +88,11 @@ import { ScrollCheckComponent } from './scroll-check/scroll-check.component';
     MatToolbarModule,
     GoogleChartsModule,
     ScrollDispatchModule,
-    MatDialogModule,
+    MatBottomSheetModule,
+    
   ],
-  providers: [{ provide: MatDialogRef, useValue: {} },
-    { provide: MAT_DIALOG_DATA, useValue: [] },],
+  providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [PizzaPartyComponent, SnackbarSuccessComponent]
+  entryComponents: [PizzaPartyComponent, SnackbarSuccessComponent, BottomSheetOverviewExampleSheet]
 })
 export class AppModule { }
