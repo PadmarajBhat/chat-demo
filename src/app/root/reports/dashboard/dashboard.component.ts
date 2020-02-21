@@ -1,24 +1,50 @@
-import { Component, OnInit, ViewChild, ElementRef, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, HostListener, Input } from '@angular/core';
 import { DataLoaderService } from '../../../reports/charts/data-loader.service';
 import { LoadScriptService } from '../../../load-script.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { trigger, state, transition, style, animate } from '@angular/animations';
+import { MatBottomSheet, MatBottomSheetRef, MatBottomSheetConfig } from '@angular/material';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 declare var google: any;
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
+  animations: [
+    trigger('flyInOut', [
+      state('in', style({ transform: 'translateX(0)' })),
+      transition('void => *', [
+        style({ transform: 'translateX(-100%)' }),
+        animate(1000)
+      ]),
+      transition('* => void', [
+        animate(1000, style({ transform: 'translateX(100%)' }))
+      ])
+    ]),
+    trigger('flyOut2', [
+      state('in', style({ transform: 'translateX(0)' })),
+      transition('* => void', [
+        animate(1000, style({ transform: 'translateX(100%)' }))
+      ])
+    ])
+  ]
 })
 export class DashboardComponent implements OnInit {
-
   @ViewChild('relocationTrend', { static: false }) relocationTrend: ElementRef;
 
+  @ViewChild(CdkVirtualScrollViewport, { static: false })
+  viewport: CdkVirtualScrollViewport;
+
+  lastScrolledOffset: number = 0;
+  bottomSheetIsOpen: boolean = false;
+  fanOut = false;
 
   constructor(
     private dl: DataLoaderService,
     private ls: LoadScriptService,
     private _sb: MatSnackBar,
+    private _bottomSheet: MatBottomSheet,
   ) { }
 
 
@@ -31,10 +57,12 @@ export class DashboardComponent implements OnInit {
       (x) => {
 
         console.log("the subscribed value ", x);
-        const data = google.visualization.arrayToDataTable(x);
-        var options = {
-          title: this.dl.chartList[idName].title,
-        };
+        const data = google.visualization.arrayToDataTable(x['data']);
+        //var options = {
+        //  title: this.dl.chartList[idName].title,
+        //};
+
+        var options = {};
 
         let myElem = document.getElementById(idName);
         var chart = new google.visualization.PieChart(myElem);
@@ -49,25 +77,30 @@ export class DashboardComponent implements OnInit {
 
   drawAll() {
 
-    for (let id of Object.keys(this.dl.chartList)) {
-      if (this.dl.chartList[id].enable) {
-        this.drawChart(id);
-      }
-    }
+    //for (let id of Object.keys(this.dl.chartList)) {
+    //  this.drawChart(id);
+    //}
 
+    for (let item of this.dl.chartList.getChartList(false)) {
+      this.drawChart(item['id']);
+    }
   }
 
   checkSelected(idName: string) {
-    return this.dl.chartList[idName].enable;
+    return this.dl.chartList.getIdEnable(idName);
   }
 
   clickedMe(idName: string, add: boolean) {
-    this.dl.chartList[idName].enable = !this.dl.chartList[idName].enable;
+    //this.dl.chartList[idName].enable = !this.dl.chartList[idName].enable;
+    if (this.checkSelected(idName)) {
+      this.fanOut = true;
+    }
+    this.dl.chartList.setIdEnable(idName);
 
 
     if (add) {
       //this.zone.run(() => {
-      //this._sb.openFromComponent(SnackbarSuccessComponent,  { duration: 3000, verticalPosition: 'top', horizontalPosition: 'center' });
+      //this._sb.openFromComponent(SnackbarSuccessComponent, { duration: 3000, verticalPosition: 'top', horizontalPosition: 'center' });
       this._sb.open(idName + " added to Dashboard", null, { duration: 3000, verticalPosition: 'top' });//, "Undo",{ duration: 3000, verticalPosition: 'top', horizontalPosition: 'center' });
       //});
     } else {
@@ -87,13 +120,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getIdList() {
-    var tempList = new Array();
-    for (let id of Object.keys(this.dl.chartList)) {
-      if (this.dl.chartList[id].enable) {
-        tempList.push(id)
-      }
-    }
-    return tempList;
+    return Object.keys(this.dl.chartList.getChartList(false));
   }
 
   ngAfterViewInit() {
@@ -118,7 +145,7 @@ export class DashboardComponent implements OnInit {
   onOrientationChange() {
 
 
-    for (let id of Object.keys(this.dl.chartList)) {
+    for (let id of Object.keys(this.dl.chartList.getChartList(false))) {
       try {
         let myElem = document.getElementById(id);
         myElem.removeChild(myElem.firstChild);
@@ -130,6 +157,52 @@ export class DashboardComponent implements OnInit {
 
   }
 
+  scrolled() {
+    let offsetDeviation = this.lastScrolledOffset - this.viewport.measureScrollOffset();
+
+    if (Math.abs(offsetDeviation) > 100 && !this.bottomSheetIsOpen) {
+      this.bottomSheetIsOpen = true
+      console.log(offsetDeviation);
+      let config: MatBottomSheetConfig = new MatBottomSheetConfig();
+      config.data = { 'enable': true }
+      this._bottomSheet.open(BottomSheetOverviewExampleSheet, config);
+
+      let observer = this._bottomSheet._openedBottomSheetRef.afterDismissed();
+      observer.subscribe(() => { }, () => { }, () => { console.log("BottomSheet Closed"); this.bottomSheetIsOpen = false });
+    }
+
+    this.lastScrolledOffset = this.viewport.measureScrollOffset();
+    //console.log("lastScrolledOffset saved"); 
+  }
+}
 
 
+
+@Component({
+  selector: 'bottom-sheet-overview-example-sheet',
+  templateUrl: '../charts/bottom-sheet.html',
+})
+export class BottomSheetOverviewExampleSheet {
+
+  @Input() myParentData;
+  constructor(
+    private _bottomSheetRef: MatBottomSheetRef<BottomSheetOverviewExampleSheet>,
+    private dl: DataLoaderService
+  ) { }
+
+  openLink(event: MouseEvent): void {
+    this._bottomSheetRef.dismiss();
+    //event.preventDefault();
+  }
+
+  getChartIds() {
+    return this.dl.chartList.getIds();
+  }
+  moveToId(id: string) {
+    console.log("scrolling", this.myParentData);
+    let myElem = document.getElementById(id + "_card");
+    myElem.scrollIntoView({ behavior: 'auto', block: 'start', inline: 'center' });
+    console.log("smooth scrolling done");
+    this._bottomSheetRef.dismiss();
+  }
 }
