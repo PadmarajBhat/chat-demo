@@ -18,10 +18,10 @@ declare var google: any;
       state('in', style({ transform: 'translateX(0)' })),
       transition('void => *', [
         style({ transform: 'translateX(-100%)' }),
-        animate(1000)
+        animate(500)
       ]),
       transition('* => void', [
-        animate(1000, style({ transform: 'translateX(100%)' }))
+        animate(500, style({ transform: 'translateX(100%)' }))
       ])
     ])
   ]
@@ -76,7 +76,7 @@ export class ChartsComponent implements OnInit {
     //  this.drawChart(id);
     //}
 
-    for (let item of this.dl.chartList.getChartList()) {
+    for (let item of this.dl.chartList.getChartList(true)) {
       this.drawChart(item['id']);
     }
   }
@@ -112,7 +112,7 @@ export class ChartsComponent implements OnInit {
   }
 
   getIdList() {
-    return Object.keys(this.dl.chartList.getChartList());
+    return Object.keys(this.dl.chartList.getChartList(true));
   }
 
   ngAfterViewInit() {
@@ -137,7 +137,7 @@ export class ChartsComponent implements OnInit {
   onOrientationChange() {
 
 
-    for (let id of Object.keys(this.dl.chartList.getChartList())) {
+    for (let id of Object.keys(this.dl.chartList.getChartList(true))) {
       try {
         let myElem = document.getElementById(id);
         myElem.removeChild(myElem.firstChild);
