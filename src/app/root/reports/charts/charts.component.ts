@@ -4,6 +4,7 @@ import { LoadScriptService } from '../../../load-script.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { MatBottomSheet, MatBottomSheetRef, MatBottomSheetConfig } from '@angular/material';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 //import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
 
 declare var google: any;
@@ -11,7 +12,19 @@ declare var google: any;
 @Component({
   selector: 'app-charts',
   templateUrl: './charts.component.html',
-  styleUrls: ['./charts.component.css']
+  styleUrls: ['./charts.component.css'],
+  animations: [
+    trigger('flyInOut', [
+      state('in', style({ transform: 'translateX(0)' })),
+      transition('void => *', [
+        style({ transform: 'translateX(-100%)' }),
+        animate(1000)
+      ]),
+      transition('* => void', [
+        animate(1000, style({ transform: 'translateX(100%)' }))
+      ])
+    ])
+  ]
 })
 export class ChartsComponent implements OnInit {
   @ViewChild('relocationTrend', { static: false }) relocationTrend: ElementRef;
