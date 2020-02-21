@@ -1,11 +1,14 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { DataLoaderService } from '../../reports/charts/data-loader.service';
 import { Platform } from '@angular/cdk/platform';
+import { RouterOutlet } from '@angular/router';
+import { slideInAnimation } from './animate';
 
 @Component({
   selector: 'app-reports',
   templateUrl: './reports.component.html',
-  styleUrls: ['./reports.component.css']
+  styleUrls: ['./reports.component.css'],
+  animations: [slideInAnimation],
 })
 export class ReportsComponent implements OnInit,AfterViewInit {
 
@@ -39,5 +42,9 @@ export class ReportsComponent implements OnInit,AfterViewInit {
   }
   getDl() {
     return this.dl;
+  }
+
+  prepareRoute(outlet: RouterOutlet) {
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
   }
 }

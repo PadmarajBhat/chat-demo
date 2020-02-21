@@ -54,8 +54,8 @@ const routes: Routes = [
       {
         path: "reports", component: ReportsComponent,
         children: [
-          { path: "dashboard", component: DashboardComponent },
-          { path: "charts", component: ChartsComponent },
+          { path: "dashboard", component: DashboardComponent, data: { animation: "dashboard" } },
+          { path: "charts", component: ChartsComponent, data: { animation: "charts" } },
         ]
 
       }

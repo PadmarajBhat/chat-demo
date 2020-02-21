@@ -6,8 +6,8 @@
   </mat-drawer>
   <mat-drawer-content>
     <!---->
-    <div [style.height.px]="getReportMainHeight()">
-      <router-outlet>
+    <div [style.height.px]="getReportMainHeight()" [@routeAnimations]="prepareRoute(outlet)">
+      <router-outlet #outlet="outlet">
 
       </router-outlet>
     </div>
