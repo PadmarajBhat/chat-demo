@@ -189,7 +189,11 @@ export class BottomSheetOverviewExampleSheet {
   }
 
   getChartIds() {
-    return this.dl.chartList.getIds();
+    let ids = new Array();
+    for (let item of this.dl.chartList.getChartList(true)) {
+      ids.push(item['id']);
+    }
+    return ids;
   }
   moveToId(id: string) {
     console.log("scrolling",this.myParentData);
