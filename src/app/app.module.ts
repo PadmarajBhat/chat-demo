@@ -15,7 +15,7 @@ import { MatCommonModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatIconModule, MatSnackBarModule, MatBottomSheetModule } from '@angular/material';
+import { MatButtonModule, MatIconModule, MatSnackBarModule, MatBottomSheetModule, MatListModule, MatTabsModule } from '@angular/material';
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 
 import { HttpClientModule } from '@angular/common/http';
@@ -91,7 +91,8 @@ import { ChartList } from './root/reports/ChartList';
     GoogleChartsModule,
     ScrollDispatchModule,
     MatBottomSheetModule,
-    
+    MatListModule,
+    MatTabsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
