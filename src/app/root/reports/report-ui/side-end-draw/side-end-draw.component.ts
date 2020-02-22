@@ -22,14 +22,14 @@ export class SideEndDrawComponent implements OnInit {
     if (this.platform.isBrowser) {
       if (this.dashboard) {
         var tempList = new Array();
-        for (let id of Object.keys(this.dl.chartList)) {
-          if (this.dl.chartList[id].enable) {
-            tempList.push(id)
+        for (let item of this.dl.chartList.getChartList(false)) {
+          if (item.enable) {
+            tempList.push(item['id'])
           }
         }
         return tempList;
       } else {
-        return Object.keys(this.dl.chartList);
+        return this.dl.chartList.getIds();
       }
     } else {
       return [];
@@ -38,7 +38,7 @@ export class SideEndDrawComponent implements OnInit {
 
   moveToId(id: string) {
     console.log("scrolling");
-    let myElem = document.getElementById(id);
-    myElem.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'start' });
+    let myElem = document.getElementById(id+"_card");
+    myElem.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' });
   }
 }

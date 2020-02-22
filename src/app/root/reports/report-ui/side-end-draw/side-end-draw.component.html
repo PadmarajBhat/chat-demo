@@ -1,4 +1,14 @@
-  <div *ngFor="let id of getChartIds()">
-    <button mat-button (click)="moveToId(id)">{{id}}</button>
-  </div>
+<!--<mat-list dense>
+  <mat-list-item *ngFor="let id of getChartIds()">
+    <a (click)="moveToId(id)">{{id}}</a>
+  </mat-list-item>
 
+</mat-list>-->
+
+
+<mat-nav-list dense>
+  <mat-list-item *ngFor="let id of getChartIds()">
+    <a (click)="moveToId(id)">{{id}}</a>
+    <!--<button mat-button (click)="moveToId(id)">{{id}}</button>-->
+  </mat-list-item>
+</mat-nav-list>
