@@ -185,7 +185,7 @@ export class DashboardComponent implements OnInit {
       console.log(offsetDeviation);
       let config: MatBottomSheetConfig = new MatBottomSheetConfig();
       config.data = { 'enable': true }
-      this._bottomSheet.open(BottomSheetOverviewExampleSheet, config);
+      this._bottomSheet.open(BottomSheetOverviewExampleSheet1, config);
 
       let observer = this._bottomSheet._openedBottomSheetRef.afterDismissed();
       observer.subscribe(() => { }, () => { }, () => { console.log("BottomSheet Closed"); this.bottomSheetIsOpen = false });
@@ -199,14 +199,14 @@ export class DashboardComponent implements OnInit {
 
 
 @Component({
-  selector: 'bottom-sheet-overview-example-sheet',
+  selector: 'bottom-sheet-overview-example-sheet1',
   templateUrl: '../charts/bottom-sheet.html',
 })
-export class BottomSheetOverviewExampleSheet {
+export class BottomSheetOverviewExampleSheet1 {
 
   @Input() myParentData;
   constructor(
-    private _bottomSheetRef: MatBottomSheetRef<BottomSheetOverviewExampleSheet>,
+    private _bottomSheetRef: MatBottomSheetRef<BottomSheetOverviewExampleSheet1>,
     private dl: DataLoaderService
   ) { }
 
@@ -216,7 +216,11 @@ export class BottomSheetOverviewExampleSheet {
   }
 
   getChartIds() {
-    return this.dl.chartList.getIds();
+    let ids = new Array();
+    for (let item of this.dl.chartList.getChartList(false)) {
+      ids.push(item['id']);
+    }
+    return ids;
   }
   moveToId(id: string) {
     console.log("scrolling", this.myParentData);

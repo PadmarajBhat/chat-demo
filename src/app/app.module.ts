@@ -38,7 +38,7 @@ import { HomeComponent } from './root/home/home.component';
 import { UploadComponent } from './root/upload/upload.component';
 import { AnalysisComponent } from './root/analysis/analysis.component';
 import { ChartsComponent, BottomSheetOverviewExampleSheet } from './root/reports/charts/charts.component';
-import { DashboardComponent } from './root/reports/dashboard/dashboard.component';
+import { DashboardComponent, BottomSheetOverviewExampleSheet1 } from './root/reports/dashboard/dashboard.component';
 import { ReportsComponent } from './root/reports/reports.component';
 import { SideEndDrawComponent } from './root/reports/report-ui/side-end-draw/side-end-draw.component';
 import { ScrollCheckComponent } from './scroll-check/scroll-check.component';
@@ -73,6 +73,7 @@ import { ChartList } from './root/reports/ChartList';
     SideEndDrawComponent,
     ScrollCheckComponent,
     BottomSheetOverviewExampleSheet,
+    BottomSheetOverviewExampleSheet1,
    ],
   imports: [
     BrowserModule,
@@ -94,6 +95,6 @@ import { ChartList } from './root/reports/ChartList';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [PizzaPartyComponent, SnackbarSuccessComponent, BottomSheetOverviewExampleSheet]
+  entryComponents: [PizzaPartyComponent, SnackbarSuccessComponent, BottomSheetOverviewExampleSheet, BottomSheetOverviewExampleSheet1]
 })
 export class AppModule { }
