@@ -1,1 +1,15 @@
-<p>navigation-scroll-check works!</p>
+<div style="position:fixed;top:0;left:0">
+  <span>Scroll Offset : </span><span>{{scrollOffset|async}}</span>
+</div>
+
+<mat-sidenav-container #mySidNav>
+  <mat-sidenav>Start</mat-sidenav>
+  <mat-sidenav position="end">End</mat-sidenav>
+  <section>
+    <div *ngFor="let item of myList">
+      <span>{{item.id}}</span><span>:</span>
+      <span>{{item.value}}</span>
+    </div>
+  </section>
+</mat-sidenav-container>
+

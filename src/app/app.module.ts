@@ -43,6 +43,7 @@ import { ReportsComponent } from './root/reports/reports.component';
 import { SideEndDrawComponent } from './root/reports/report-ui/side-end-draw/side-end-draw.component';
 import { ScrollCheckComponent } from './scroll-check/scroll-check.component';
 import { ChartList } from './root/reports/ChartList';
+import { NavigationScrollCheckComponent } from './navigation-scroll-check/navigation-scroll-check.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { ChartList } from './root/reports/ChartList';
     ScrollCheckComponent,
     BottomSheetOverviewExampleSheet,
     BottomSheetOverviewExampleSheet1,
+    NavigationScrollCheckComponent,
    ],
   imports: [
     BrowserModule,
