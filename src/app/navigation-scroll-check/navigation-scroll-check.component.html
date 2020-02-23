@@ -1,15 +1,24 @@
-<div style="position:fixed;top:0;left:0">
-  <span>Scroll Offset : </span><span>{{scrollOffset|async}}</span>
-</div>
+<mat-sidenav-container>
 
-<mat-sidenav-container #mySidNav>
-  <mat-sidenav>Start</mat-sidenav>
-  <mat-sidenav position="end">End</mat-sidenav>
   <section>
-    <div *ngFor="let item of myList">
-      <span>{{item.id}}</span><span>:</span>
-      <span>{{item.value}}</span>
-    </div>
+    <cdk-virtual-scroll-viewport itemSize="300" maxBufferPx="20000" style="height:650px">
+      <ng-container *cdkVirtualFor="let item of myOtherList; TrackBy:trackByFunc">
+        <div [attr.id]="item.id" style="height:350px;background-color:gray">
+          <span>{{item.id}}</span><span>:</span>
+          <span>{{item.value}}</span>
+        </div>
+      </ng-container>
+    </cdk-virtual-scroll-viewport>
+
   </section>
+  <mat-drawer mode="side" autoFocus="true" position="end" opened>
+    <mat-nav-list dense>
+      <mat-list-item *ngFor="let item of myOtherList">
+        <a [ngClass]="getActiveStatus(item['id'])" (click)="moveToId(item.id)">{{item.id}}</a>
+        <!-- [attr.href]="getHref(item.id)" <button mat-button (click)="moveToId(id)">{{id}}</button>-->
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-drawer>
 </mat-sidenav-container>
+
 

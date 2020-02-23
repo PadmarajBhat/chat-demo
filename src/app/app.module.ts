@@ -16,7 +16,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatIconModule, MatSnackBarModule, MatBottomSheetModule, MatListModule, MatTabsModule } from '@angular/material';
-import { ScrollDispatchModule } from '@angular/cdk/scrolling';
+import { ScrollingModule, ScrollDispatchModule } from '@angular/cdk/scrolling';
 
 import { HttpClientModule } from '@angular/common/http';
 import { CustomersModule } from './customers/customers.module';
@@ -91,7 +91,7 @@ import { NavigationScrollCheckComponent } from './navigation-scroll-check/naviga
     CustomersModule,
     MatToolbarModule,
     GoogleChartsModule,
-    ScrollDispatchModule,
+    ScrollingModule, ScrollDispatchModule,
     MatBottomSheetModule,
     MatListModule,
     MatTabsModule,

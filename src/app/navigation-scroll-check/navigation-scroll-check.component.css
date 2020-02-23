@@ -1,0 +1,6 @@
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+.active {
+  font-weight: bold !important;
+  color: red !important;
+  font-size: 1.2rem !important;
+}
