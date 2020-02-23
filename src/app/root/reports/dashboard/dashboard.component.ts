@@ -225,8 +225,12 @@ export class BottomSheetOverviewExampleSheet1 {
   moveToId(id: string) {
     console.log("scrolling", this.myParentData);
     let myElem = document.getElementById(id + "_card");
-    myElem.scrollIntoView({ behavior: 'auto', block: 'start', inline: 'center' });
+    myElem.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'center' });
     console.log("smooth scrolling done");
-    this._bottomSheetRef.dismiss();
+    setTimeout(
+      () => this._bottomSheetRef.dismiss(),
+      1000
+    );
+    
   }
 }
