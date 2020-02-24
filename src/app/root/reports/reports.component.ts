@@ -29,8 +29,8 @@ export class ReportsComponent implements OnInit,AfterViewInit {
   }
 
   ngAfterViewInit() {
-    let myElem = document.getElementById("charts");
-    myElem.click();
+    //let myElem = document.getElementById("charts");
+    //myElem.click();
   }
 
   setDashboard(bool: boolean) {

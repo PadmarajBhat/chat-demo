@@ -1,24 +1,23 @@
 <mat-tab-group mat-stretch-tabs>
   <mat-tab label="Dashboard">
     <ng-template matTabContent>
-      The First Content
+      <app-dashboard></app-dashboard>
     </ng-template>
   </mat-tab>
   <mat-tab label="Charts">
     <ng-template matTabContent>
-      The Second Content
+      <app-charts></app-charts>
     </ng-template>
   </mat-tab>
 </mat-tab-group>
 
-<mat-drawer-container>
+<!--<mat-drawer-container>
   
   <mat-drawer mode="side" opened>
     <button id="dashboard" (click)="setDashboard(true)" mat-button [routerLink]="['dashboard']">Dashboard</button><br />
     <button id="charts" (click)="setDashboard(false)"  mat-button [routerLink]="['charts']">Charts</button>
   </mat-drawer>
   <mat-drawer-content>
-    <!---->
     <div [style.height.px]="getReportMainHeight()" [@routeAnimations]="prepareRoute(outlet)">
       <router-outlet #outlet="outlet">
 
@@ -32,4 +31,4 @@
   </mat-drawer>
 
 
-</mat-drawer-container>
+</mat-drawer-container>-->
