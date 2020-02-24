@@ -167,7 +167,12 @@ export class ChartsComponent implements OnInit {
     //console.log("lastScrolledOffset saved"); 
   }
 
-
+  getDashboard() {
+    return false;
+  }
+  getDl() {
+    return this.dl;
+  }
 }
 
 
@@ -204,4 +209,6 @@ export class BottomSheetOverviewExampleSheet {
       ()=>this._bottomSheetRef.dismiss(),
       1000);
   }
+
+
 }

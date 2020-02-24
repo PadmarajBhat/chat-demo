@@ -1,23 +1,28 @@
-<cdk-virtual-scroll-viewport itemSize="2" style="height: 100%" (scroll)="scrolled()">
-  <div @filterAnimation *cdkVirtualFor="let item of this.dl.chartList.getChartList(false)">
-    <mat-card   [attr.id]="item['id']+'_card'" [ngStyle]="getCareerLevelFraudStyle()">
+<mat-drawer-container>
+  <cdk-virtual-scroll-viewport itemSize="2" style="height: 100%" (scroll)="scrolled()">
+    <div @filterAnimation *cdkVirtualFor="let item of this.dl.chartList.getChartList(false)">
+      <mat-card [attr.id]="item['id']+'_card'" [ngStyle]="getCareerLevelFraudStyle()">
 
-      <mat-card-header>
-        <mat-card-title>{{item["title"]}}</mat-card-title>
-        <mat-card-subtitle>{{item["subTitle"]}}</mat-card-subtitle>
+        <mat-card-header>
+          <mat-card-title>{{item["title"]}}</mat-card-title>
+          <mat-card-subtitle>{{item["subTitle"]}}</mat-card-subtitle>
 
-        <button *ngIf="!checkSelected(item['id'])" (click)="clickedMe(item['id'],true);" mat-icon-button style="right:0;position:absolute">
-          <mat-icon>playlist_add</mat-icon>
-        </button>
-        <button #b1 *ngIf="checkSelected(item['id'])" (click)="clickedMe(item['id'],false)" mat-icon-button style="color:darkgreen;right:0;position:absolute">
-          <mat-icon>playlist_add_check</mat-icon>
-        </button>
-      </mat-card-header>
+          <button *ngIf="!checkSelected(item['id'])" (click)="clickedMe(item['id'],true);" mat-icon-button style="right:0;position:absolute">
+            <mat-icon>playlist_add</mat-icon>
+          </button>
+          <button #b1 *ngIf="checkSelected(item['id'])" (click)="clickedMe(item['id'],false)" mat-icon-button style="color:darkgreen;right:0;position:absolute">
+            <mat-icon>playlist_add_check</mat-icon>
+          </button>
+        </mat-card-header>
 
-      <mat-card-content [ngStyle]="{'flex':1}" [attr.id]="item['id']" #relocationTrend>
-      </mat-card-content>
+        <mat-card-content [ngStyle]="{'flex':1}" [attr.id]="item['id']" #relocationTrend>
+        </mat-card-content>
 
-    </mat-card>
+      </mat-card>
 
-  </div>
-</cdk-virtual-scroll-viewport>
+    </div>
+  </cdk-virtual-scroll-viewport>
+  <mat-drawer mode="side" autoFocus="true" position="end" opened>
+    <app-side-end-draw [dashboard]="getDashboard()" [dl]="getDl()"></app-side-end-draw>
+  </mat-drawer>
+</mat-drawer-container>

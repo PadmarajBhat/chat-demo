@@ -194,6 +194,12 @@ export class DashboardComponent implements OnInit {
     this.lastScrolledOffset = this.viewport.measureScrollOffset();
     //console.log("lastScrolledOffset saved"); 
   }
+  getDashboard() {
+    return true;
+  }
+  getDl() {
+    return this.dl;
+  }
 }
 
 
@@ -233,4 +239,6 @@ export class BottomSheetOverviewExampleSheet1 {
     );
     
   }
+
+
 }
