@@ -79,7 +79,7 @@ export class RelocationWiseTrendComponent implements OnInit {
 
   clickedMe(idName: string, add: boolean) {
     //this.dl.chartList[idName].enable = !this.dl.chartList[idName].enable;
-    this.dl.setEnableId(idName);
+    //this.dl.setEnableId(idName);
 
     
     if (add) {
