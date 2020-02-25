@@ -20,18 +20,24 @@ export class SideEndDrawComponent implements OnInit {
 
   getChartIds() {
     if (this.platform.isBrowser) {
+      var tempList = new Array();
       if (this.dashboard) {
-        var tempList = new Array();
+
         for (let item of this.dl.chartList.getChartList(false)) {
           if (item.enable) {
-            tempList.push(item['id'])
+            tempList.push(item['title'])
           }
         }
         return tempList;
       } else {
-        return this.dl.chartList.getIds();
+        for (let item of this.dl.chartList.getChartList(true)) {
+            tempList.push(item['title']);
+          
+          //return this.dl.chartList.getIds();
+        }
+        return tempList;
       }
-    } else {
+    }else {
       return [];
     }
   }

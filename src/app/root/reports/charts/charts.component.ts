@@ -113,7 +113,13 @@ export class ChartsComponent implements OnInit, AfterContentChecked {
   }
 
   getIdList() {
-    return Object.keys(this.dl.chartList.getChartList(true));
+    let tempArray = new Array();
+
+    for (let item of this.dl.chartList.getChartList(true)) {
+      tempArray.push(item.title);
+    }
+    return tempArray;
+    //return Object.keys(this.dl.chartList.getChartList(true));
   }
 
   ngAfterViewInit() {
@@ -153,16 +159,16 @@ export class ChartsComponent implements OnInit, AfterContentChecked {
   scrolled() {
     let offsetDeviation = this.lastScrolledOffset - this.viewport.measureScrollOffset();
 
-    if (Math.abs(offsetDeviation) > 100 && !this.bottomSheetIsOpen) {
-      this.bottomSheetIsOpen = true
-      console.log(offsetDeviation);
-      let config: MatBottomSheetConfig = new MatBottomSheetConfig();
-      config.data = {'enable':true}
-      this._bottomSheet.open(BottomSheetOverviewExampleSheet, config);
+    //if (Math.abs(offsetDeviation) > 100 && !this.bottomSheetIsOpen) {
+    //  this.bottomSheetIsOpen = true
+    //  console.log(offsetDeviation);
+    //  let config: MatBottomSheetConfig = new MatBottomSheetConfig();
+    //  config.data = {'enable':true}
+    //  this._bottomSheet.open(BottomSheetOverviewExampleSheet, config);
       
-      let observer = this._bottomSheet._openedBottomSheetRef.afterDismissed();
-      observer.subscribe(() => { }, () => { }, () => { console.log("BottomSheet Closed"); this.bottomSheetIsOpen = false });
-    }
+    //  let observer = this._bottomSheet._openedBottomSheetRef.afterDismissed();
+    //  observer.subscribe(() => { }, () => { }, () => { console.log("BottomSheet Closed"); this.bottomSheetIsOpen = false });
+    //}
     
     this.lastScrolledOffset = this.viewport.measureScrollOffset();
     //console.log("lastScrolledOffset saved"); 
