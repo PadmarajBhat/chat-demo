@@ -11,16 +11,18 @@ declare var google: any;
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
-  animations: [
-    trigger('filterAnimation', [
-      transition(':enter', [
-        query('*', [
-          style({ opacity: 0, transform: 'translateY(-100px)' }),
-          stagger(-30, [
-            animate('500ms cubic-bezier(0.35, 0, 0.25, 1)', style({ opacity: 1, transform: 'none' }))
-          ])
-        ])
-      ])
+  //animations: [
+    //trigger('filterAnimation', [
+    //  transition(':enter', [
+    //    query('*', [
+    //      style({ opacity: 0, transform: 'translateY(-100px)' }),
+    //      stagger(-30, [
+    //        animate('500ms cubic-bezier(0.35, 0, 0.25, 1)', style({ opacity: 1, transform: 'none' }))
+    //      ])
+    //    ])
+    //  ])
+
+
       //transition(':enter, * => 0, * => -1', []),
       //transition(':increment', [
       //  query(':enter', [
@@ -37,7 +39,7 @@ declare var google: any;
       //    ]),
       //  ])
       //]),
-    ])
+    //])
     //trigger('flyInOut', [
     //  state('in', style({ transform: 'translateX(0)' })),
     //  transition(':enter', [
@@ -48,7 +50,7 @@ declare var google: any;
     //    animate(500, style({ transform: 'translateX(100%)' }))
     //  ])
     //])
-  ]
+  //]
 })
 export class DashboardComponent implements OnInit {
   @ViewChild('relocationTrend', { static: false }) relocationTrend: ElementRef;

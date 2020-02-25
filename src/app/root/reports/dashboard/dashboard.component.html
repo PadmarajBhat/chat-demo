@@ -1,5 +1,5 @@
 <mat-drawer-container>
-  <cdk-virtual-scroll-viewport itemSize="2" style="height: 100%" (scroll)="scrolled()">
+  <cdk-virtual-scroll-viewport itemSize="2" style="height: 100vw" (scroll)="scrolled()">
     <div @filterAnimation *cdkVirtualFor="let item of this.dl.chartList.getChartList(false)">
       <mat-card [attr.id]="item['id']+'_card'" [ngStyle]="getCareerLevelFraudStyle()">
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, HostListener, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, HostListener, Input, ChangeDetectorRef, AfterViewChecked, AfterContentChecked } from '@angular/core';
 import { DataLoaderService } from '../../../reports/charts/data-loader.service';
 import { LoadScriptService } from '../../../load-script.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -13,20 +13,20 @@ declare var google: any;
   selector: 'app-charts',
   templateUrl: './charts.component.html',
   styleUrls: ['./charts.component.css'],
-  animations: [
-    trigger('flyInOut', [
-      state('in', style({ transform: 'translateX(0)' })),
-      transition('void => *', [
-        style({ transform: 'translateX(-100%)' }),
-        animate(500)
-      ]),
-      transition('* => void', [
-        animate(500, style({ transform: 'translateX(100%)' }))
-      ])
-    ])
-  ]
+  //animations: [
+  //  trigger('flyInOut', [
+  //    state('in', style({ transform: 'translateX(0)' })),
+  //    transition('void => *', [
+  //      style({ transform: 'translateX(-100%)' }),
+  //      animate(500)
+  //    ]),
+  //    transition('* => void', [
+  //      animate(500, style({ transform: 'translateX(100%)' }))
+  //    ])
+  //  ])
+  //]
 })
-export class ChartsComponent implements OnInit {
+export class ChartsComponent implements OnInit, AfterContentChecked {
   @ViewChild('relocationTrend', { static: false }) relocationTrend: ElementRef;
 
   @ViewChild(CdkVirtualScrollViewport, { static: false })
@@ -40,6 +40,7 @@ export class ChartsComponent implements OnInit {
     private ls: LoadScriptService,
     private _sb: MatSnackBar,
     private _bottomSheet: MatBottomSheet,
+    private cdref: ChangeDetectorRef,
   ) { }
 
 
@@ -172,6 +173,13 @@ export class ChartsComponent implements OnInit {
   }
   getDl() {
     return this.dl;
+  }
+  ngAfterContentChecked() {
+
+    //this.sampleViewModel.DataContext = this.DataContext;
+    //this.sampleViewModel.Position = this.Position;
+    this.cdref.detectChanges();
+
   }
 }
 
