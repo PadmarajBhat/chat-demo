@@ -1,28 +1,28 @@
 
-  <cdk-virtual-scroll-viewport itemSize="500px" style="height:20000px" (scroll)="scrolled()">
+  <cdk-virtual-scroll-viewport itemSize="500px" style="height:535px" (scroll)="scrolled()">
 
-      <div style="left:0" *cdkVirtualFor="let item of this.dl.chartList.getChartList(true)">
-        <mat-card [@flyInOut] [attr.id]="item['title']+'_card'" [ngStyle]="getCareerLevelFraudStyle()">
+    <div *cdkVirtualFor="let item of this.dl.chartList.getChartList(true)">
+      <mat-card [@flyInOut] [attr.id]="item['title']+'_card'" [ngStyle]="getCareerLevelFraudStyle()">
 
-          <mat-card-header>
-            <mat-card-title>{{item["title"]}}</mat-card-title>
-            <mat-card-subtitle>{{item["subTitle"]}}</mat-card-subtitle>
+        <mat-card-header>
+          <mat-card-title>{{item["title"]}}</mat-card-title>
+          <mat-card-subtitle>{{item["subTitle"]}}</mat-card-subtitle>
 
-            <button *ngIf="!checkSelected(item['id'])" (click)="clickedMe(item['id'],true);" mat-icon-button style="right:0;position:absolute">
-              <mat-icon>playlist_add</mat-icon>
-            </button>
-            <button *ngIf="checkSelected(item['id'])" (click)="clickedMe(item['id'],false)" mat-icon-button style="color:darkgreen;right:0;position:absolute">
-              <mat-icon>playlist_add_check</mat-icon>
-            </button>
-          </mat-card-header>
+          <button *ngIf="!checkSelected(item['id'])" (click)="clickedMe(item['id'],true);" mat-icon-button style="right:0;position:absolute">
+            <mat-icon>playlist_add</mat-icon>
+          </button>
+          <button *ngIf="checkSelected(item['id'])" (click)="clickedMe(item['id'],false)" mat-icon-button style="color:darkgreen;right:0;position:absolute">
+            <mat-icon>playlist_add_check</mat-icon>
+          </button>
+        </mat-card-header>
 
-          <mat-card-content [ngStyle]="{'flex':1}" [attr.id]="item['id']" #relocationTrend>
-          </mat-card-content>
+        <mat-card-content [ngStyle]="{'flex':1}" [attr.id]="item['id']" #relocationTrend>
+        </mat-card-content>
 
-        </mat-card>
+      </mat-card>
 
-      </div>
+    </div>
 
-
+    <!--<app-side-end-draw [dashboard]="getDashboard()" [dl]="getDl()"></app-side-end-draw>-->
   </cdk-virtual-scroll-viewport>
 

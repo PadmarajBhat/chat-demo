@@ -104,11 +104,11 @@ export class ChartsComponent implements OnInit, AfterContentChecked {
 
   getCareerLevelFraudStyle() {
     return {
-      'margin': '5%',
+      'margin': '1%',
       'background-color': 'white',
       'display': 'flex',
       'flex-direction': 'column',
-      'height.px': window.innerHeight * .8,
+      'height.px': (window.innerHeight - this.viewport.elementRef.nativeElement.parentElement.offsetTop)  * .7,
     }
   }
 
