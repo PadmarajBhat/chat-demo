@@ -1,10 +1,7 @@
 
-  <cdk-virtual-scroll-viewport itemSize="200px" style="height:540px" (scroll)="scrolled()">
-    <mat-drawer-container>
-      <mat-drawer mode="side" autoFocus="true" position="end" opened>
-        <app-side-end-draw [dashboard]="getDashboard()" [dl]="getDl()"></app-side-end-draw>
-      </mat-drawer>
-      <div *cdkVirtualFor="let item of this.dl.chartList.getChartList(true)">
+  <cdk-virtual-scroll-viewport itemSize="500px" style="height:20000px" (scroll)="scrolled()">
+
+      <div style="left:0" *cdkVirtualFor="let item of this.dl.chartList.getChartList(true)">
         <mat-card [@flyInOut] [attr.id]="item['title']+'_card'" [ngStyle]="getCareerLevelFraudStyle()">
 
           <mat-card-header>
@@ -26,6 +23,6 @@
 
       </div>
 
-    </mat-drawer-container>
+
   </cdk-virtual-scroll-viewport>
 

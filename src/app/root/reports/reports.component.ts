@@ -8,7 +8,7 @@ import { slideInAnimation } from './animate';
   selector: 'app-reports',
   templateUrl: './reports.component.html',
   styleUrls: ['./reports.component.css'],
-  animations: [slideInAnimation],
+  //animations: [slideInAnimation],
 })
 export class ReportsComponent implements OnInit,AfterViewInit {
 

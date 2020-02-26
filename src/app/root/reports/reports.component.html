@@ -1,11 +1,16 @@
 <mat-tab-group [dynamicHeight]='true' mat-stretch-tabs>
-  <mat-tab  label="Charts">
-    <app-charts></app-charts>
-    <!--<ng-template matTabContent>
+  <mat-tab label="Charts">
+    
+    <mat-drawer-container>
 
-    </ng-template>-->
+      <mat-drawer mode="side" autoFocus="true" position="end" opened>
+        <app-side-end-draw [dashboard]="getDashboard()" [dl]="getDl()"></app-side-end-draw>
+      </mat-drawer>
+      <app-charts></app-charts>
+
+    </mat-drawer-container>
   </mat-tab>
-  <mat-tab  label="Dashboard">
+  <mat-tab label="Dashboard">
     <!--<ng-template matTabContent>-->
     <app-dashboard></app-dashboard>
     <!--</ng-template>-->
@@ -13,8 +18,10 @@
 
 </mat-tab-group>
 
+
+ 
 <!--<mat-drawer-container>
-  
+
   <mat-drawer mode="side" opened>
     <button id="dashboard" (click)="setDashboard(true)" mat-button [routerLink]="['dashboard']">Dashboard</button><br />
     <button id="charts" (click)="setDashboard(false)"  mat-button [routerLink]="['charts']">Charts</button>
@@ -27,7 +34,7 @@
     </div>
 
   </mat-drawer-content>
-  
+
   <mat-drawer mode="side" autoFocus="true" position="end" opened>
     <app-side-end-draw [dashboard]="getDashboard()" [dl]="getDl()"></app-side-end-draw>
   </mat-drawer>
