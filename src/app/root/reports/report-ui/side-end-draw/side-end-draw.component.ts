@@ -9,8 +9,9 @@ import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 })
 export class SideEndDrawComponent implements OnInit, AfterViewInit {
     
-  @ViewChild("cdkViewPort", { static: true }) sidenavContainer: CdkVirtualScrollViewport;
+  @ViewChild("cdkViewPort", { static: false }) sidenavContainer: CdkVirtualScrollViewport;
   @Input() dashboard: boolean;
+  //#Input() sidenavContainer: CdkVirtualScrollViewport;
   @Input() dl;
   lastScrolledIndex: string;
 
@@ -22,6 +23,7 @@ export class SideEndDrawComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    //let sidenavContainer = document.getElementById("cdkViewPort");
     this.sidenavContainer.scrolledIndexChange.subscribe(
       (x) => {
         console.log("ScrolledIndexChange : ", x);
@@ -57,7 +59,7 @@ export class SideEndDrawComponent implements OnInit, AfterViewInit {
   }
 
   moveToId(id: string) {
-    console.log("scrolling side-end-draw");
+    console.log("scrolling side-end-draw", this.sidenavContainer);
     let myElem = document.getElementById(id+"_card");
     myElem.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' });
   }
