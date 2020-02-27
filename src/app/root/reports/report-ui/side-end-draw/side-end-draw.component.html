@@ -8,7 +8,7 @@
 
 <mat-nav-list dense>
   <mat-list-item style="height: 22px" *ngFor="let id of getChartIds()">
-    <a (click)="moveToId(id)">{{id}}</a>
+    <a [ngClass]="getActiveStatus(id)" (click)="moveToId(id)">{{id}}</a>
     <!--<button mat-button (click)="moveToId(id)">{{id}}</button>-->
   </mat-list-item>
 </mat-nav-list>
