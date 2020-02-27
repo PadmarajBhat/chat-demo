@@ -37,8 +37,8 @@ import { RootComponent } from './root/root.component';
 import { HomeComponent } from './root/home/home.component';
 import { UploadComponent } from './root/upload/upload.component';
 import { AnalysisComponent } from './root/analysis/analysis.component';
-import { ChartsComponent, BottomSheetOverviewExampleSheet } from './root/reports/charts/charts.component';
-import { DashboardComponent, BottomSheetOverviewExampleSheet1 } from './root/reports/dashboard/dashboard.component';
+import { ChartsComponent } from './root/reports/charts/charts.component';
+import { DashboardComponent } from './root/reports/dashboard/dashboard.component';
 import { ReportsComponent } from './root/reports/reports.component';
 import { SideEndDrawComponent } from './root/reports/report-ui/side-end-draw/side-end-draw.component';
 import { ScrollCheckComponent } from './scroll-check/scroll-check.component';
@@ -73,8 +73,6 @@ import { NavigationScrollCheckComponent } from './navigation-scroll-check/naviga
     ChartsComponent,
     SideEndDrawComponent,
     ScrollCheckComponent,
-    BottomSheetOverviewExampleSheet,
-    BottomSheetOverviewExampleSheet1,
     NavigationScrollCheckComponent,
    ],
   imports: [
@@ -98,6 +96,6 @@ import { NavigationScrollCheckComponent } from './navigation-scroll-check/naviga
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [PizzaPartyComponent, SnackbarSuccessComponent, BottomSheetOverviewExampleSheet, BottomSheetOverviewExampleSheet1]
+  entryComponents: [PizzaPartyComponent, SnackbarSuccessComponent,]
 })
 export class AppModule { }

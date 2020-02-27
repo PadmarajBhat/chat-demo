@@ -1,8 +1,9 @@
+<mat-drawer-container>
 
-  <cdk-virtual-scroll-viewport id="cdkViewPort" itemSize="500px" style="height:535px" (scroll)="scrolled()">
+  <cdk-virtual-scroll-viewport id="cdkViewPort" itemSize="500" maxBufferPx="20000" style="height:535px" >
 
-    <div *cdkVirtualFor="let item of this.dl.chartList.getChartList(true)">
-      <mat-card [@flyInOut] [attr.id]="item['title']+'_card'" [ngStyle]="getCareerLevelFraudStyle()">
+    <div *cdkVirtualFor="let item of this.dl.chartList.getChartList(true);TrackBy:trackByFunc">
+      <mat-card [attr.id]="item['title']+'_card'" [ngStyle]="getCareerLevelFraudStyle()">
 
         <mat-card-header>
           <mat-card-title>{{item["title"]}}</mat-card-title>
@@ -26,3 +27,13 @@
     <!--<app-side-end-draw [dashboard]="getDashboard()" [dl]="getDl()"></app-side-end-draw>-->
   </cdk-virtual-scroll-viewport>
 
+  <mat-drawer mode="side" autoFocus="true" position="end" opened>
+    <!--<app-side-end-draw [dashboard]="getDashboard()" [dl]="getDl()"></app-side-end-draw>-->
+    <mat-nav-list dense>
+      <mat-list-item *ngFor="let item of this.dl.chartList.getChartList(true)">
+        <a [ngClass]="getActiveStatus(item['title'])" (click)="moveToId(item.title)">{{item.title}}</a>
+        <!-- [attr.href]="getHref(item.id)" <button mat-button (click)="moveToId(id)">{{id}}</button>-->
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-drawer>
+</mat-drawer-container>

@@ -1,11 +1,8 @@
 <mat-tab-group [dynamicHeight]='true' mat-stretch-tabs>
   <mat-tab label="Charts">
-    <mat-drawer-container>
+    
       <app-charts></app-charts>
-      <mat-drawer mode="side" autoFocus="true" position="end" opened>
-        <app-side-end-draw  [dashboard]="getDashboard()" [dl]="getDl()"></app-side-end-draw>
-      </mat-drawer>
-    </mat-drawer-container>
+
 </mat-tab>
   <mat-tab label="Dashboard">
     <!--<ng-template matTabContent>-->

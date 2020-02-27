@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild, ElementRef, HostListener, Input, ChangeDetectorRef, AfterViewChecked, AfterContentChecked } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, HostListener, Input, ChangeDetectorRef, AfterViewChecked, AfterContentChecked, AfterViewInit } from '@angular/core';
 import { DataLoaderService } from '../../../reports/charts/data-loader.service';
 import { LoadScriptService } from '../../../load-script.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { MatBottomSheet, MatBottomSheetRef, MatBottomSheetConfig } from '@angular/material';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { ChartsSideNavService } from '../../../charts-side-nav.service';
 //import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
 
 declare var google: any;
@@ -26,25 +27,25 @@ declare var google: any;
   //  ])
   //]
 })
-export class ChartsComponent implements OnInit, AfterContentChecked {
-  @ViewChild('relocationTrend', { static: false }) relocationTrend: ElementRef;
-
-  @ViewChild(CdkVirtualScrollViewport, { static: false })
+export class ChartsComponent implements OnInit, AfterViewInit {
+  
+  @ViewChild(CdkVirtualScrollViewport, { static: true })
   viewport: CdkVirtualScrollViewport;
 
-  lastScrolledOffset: number = 0;
-  bottomSheetIsOpen: boolean = false;
+  lastScrolledIndex: number;
+
 
   constructor(
     private dl: DataLoaderService,
     private ls: LoadScriptService,
     private _sb: MatSnackBar,
     private _bottomSheet: MatBottomSheet,
-    private cdref: ChangeDetectorRef,
   ) { }
 
 
   ngOnInit() {
+    //this.scrollIndexChange.setScrollIndexChange(this.viewport.scrolledIndexChange);
+    
   }
 
   drawChart(idName) {
@@ -123,6 +124,15 @@ export class ChartsComponent implements OnInit, AfterContentChecked {
   }
 
   ngAfterViewInit() {
+    this.viewport.scrolledIndexChange.subscribe(
+      (x) => {
+        console.log("ScrolledIndexChange : ", x);
+        this.toggle(x);
+        this.toggle(this.lastScrolledIndex);
+        this.lastScrolledIndex = x;
+      }
+    );
+
     this.ls.loadScript('googleCharts').then(() => {
       console.log("Google Chart Script got attached to body !!!", google);
       try {
@@ -156,73 +166,44 @@ export class ChartsComponent implements OnInit, AfterContentChecked {
 
   }
 
-  scrolled() {
-    let offsetDeviation = this.lastScrolledOffset - this.viewport.measureScrollOffset();
-
-    //if (Math.abs(offsetDeviation) > 100 && !this.bottomSheetIsOpen) {
-    //  this.bottomSheetIsOpen = true
-    //  console.log(offsetDeviation);
-    //  let config: MatBottomSheetConfig = new MatBottomSheetConfig();
-    //  config.data = {'enable':true}
-    //  this._bottomSheet.open(BottomSheetOverviewExampleSheet, config);
-      
-    //  let observer = this._bottomSheet._openedBottomSheetRef.afterDismissed();
-    //  observer.subscribe(() => { }, () => { }, () => { console.log("BottomSheet Closed"); this.bottomSheetIsOpen = false });
-    //}
-    
-    this.lastScrolledOffset = this.viewport.measureScrollOffset();
-    //console.log("lastScrolledOffset saved"); 
-  }
-
-  getDashboard() {
-    return false;
-  }
-  getDl() {
-    return this.dl;
-  }
-  ngAfterContentChecked() {
-
-    //this.sampleViewModel.DataContext = this.DataContext;
-    //this.sampleViewModel.Position = this.Position;
-    this.cdref.detectChanges();
-
-  }
-}
-
-
-@Component({
-  selector: 'bottom-sheet-overview-example-sheet',
-  templateUrl: 'bottom-sheet.html',
-})
-export class BottomSheetOverviewExampleSheet {
-
-  @Input() myParentData;
-  constructor(
-    private _bottomSheetRef: MatBottomSheetRef<BottomSheetOverviewExampleSheet>,
-    private dl: DataLoaderService
-  ) { }
-
-  openLink(event: MouseEvent): void {
-    this._bottomSheetRef.dismiss();
-    //event.preventDefault();
-  }
-
-  getChartIds() {
-    let ids = new Array();
-    for (let item of this.dl.chartList.getChartList(true)) {
-      ids.push(item['id']);
-    }
-    return ids;
-  }
   moveToId(id: string) {
-    console.log("scrolling",this.myParentData);
-    let myElem = document.getElementById(id+"_card");
-    myElem.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'center' });
-    console.log("smooth scrolling done");
-    setTimeout(
-      ()=>this._bottomSheetRef.dismiss(),
-      1000);
+    console.log("moveToId : ", id+"_card");
+    let myElem = document.getElementById(id +"_card");
+    myElem.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' });
+    console.log("moveToId : ", id);
   }
 
+  //toggle(id: string) {
 
+  //  for (var i = 0; i < this.dl.chartList.getChartList(true).length; i++) {
+  //    if (this.dl.chartList.getChartList(true)[i].id == "Item " + id) {
+  //      this.dl.chartList.getChartList(true)[i].enable = !this.dl.chartList.getChartList(true)[i].enable;
+  //      return;
+  //    }
+  //  }
+  //}
+
+  toggle(id: number) {
+    this.dl.chartList.getChartList(true)[id].enable = !this.dl.chartList.getChartList(true)[id].enable;
+  }
+
+  //getActiveStatus(id: string) {
+  //  for (var i = 0; i < this.dl.chartList.getChartList(true).length; i++) {
+  //    if (this.dl.chartList.getChartList(true)[i].id == id) {
+  //      return { 'active': this.dl.chartList.getChartList(true)[i].enable };
+  //    }
+  //  }
+
+  //}
+
+  getActiveStatus(id: string) {
+    //console.log("getActiveStatus :", id);
+
+    return { 'active': this.dl.chartList.getChartList(true)[id].enable }
+    
+  }
+  trackByFunc(index, item) {
+    console.log("trackByFunc : ", index, item);
+    return item.id;
+  }
 }
