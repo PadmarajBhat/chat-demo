@@ -1,5 +1,5 @@
 
-  <cdk-virtual-scroll-viewport itemSize="500px" style="height:535px" (scroll)="scrolled()">
+  <cdk-virtual-scroll-viewport #cdkViewPort itemSize="500px" style="height:535px" (scroll)="scrolled()">
 
     <div *cdkVirtualFor="let item of this.dl.chartList.getChartList(true)">
       <mat-card [@flyInOut] [attr.id]="item['title']+'_card'" [ngStyle]="getCareerLevelFraudStyle()">
