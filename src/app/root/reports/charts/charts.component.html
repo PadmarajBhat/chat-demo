@@ -30,8 +30,8 @@
   <mat-drawer mode="side" autoFocus="true" position="end" opened>
     <!--<app-side-end-draw [dashboard]="getDashboard()" [dl]="getDl()"></app-side-end-draw>-->
     <mat-nav-list dense>
-      <mat-list-item *ngFor="let item of this.dl.chartList.getChartList(true)">
-        <a [ngClass]="getActiveStatus(item['title'])" (click)="moveToId(item.title)">{{item.title}}</a>
+      <mat-list-item *ngFor="let item of this.dl.chartList.getChartList(true);let i=index">
+        <a [ngClass]="cssArray[i]" (click)="moveToId(item.title)">{{item.title}}</a>
         <!-- [attr.href]="getHref(item.id)" <button mat-button (click)="moveToId(id)">{{id}}</button>-->
       </mat-list-item>
     </mat-nav-list>

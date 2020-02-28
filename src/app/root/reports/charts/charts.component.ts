@@ -33,19 +33,22 @@ export class ChartsComponent implements OnInit, AfterViewInit {
   viewport: CdkVirtualScrollViewport;
 
   lastScrolledIndex: number;
-
+  cssArray = new Array();
 
   constructor(
     private dl: DataLoaderService,
     private ls: LoadScriptService,
     private _sb: MatSnackBar,
     private _bottomSheet: MatBottomSheet,
-  ) { }
+  ) {
+  }
 
 
   ngOnInit() {
     //this.scrollIndexChange.setScrollIndexChange(this.viewport.scrolledIndexChange);
-    
+    for (var i = 0; i < this.dl.chartList.getChartList(true).length; i++) {
+      this.cssArray.push(false);
+    }
   }
 
   drawChart(idName) {
@@ -127,8 +130,8 @@ export class ChartsComponent implements OnInit, AfterViewInit {
     this.viewport.scrolledIndexChange.subscribe(
       (x) => {
         console.log("ScrolledIndexChange : ", x);
-        this.toggle(x);
-        this.toggle(this.lastScrolledIndex);
+        this.cssArray[x]=true;
+        this.cssArray[this.lastScrolledIndex]=false;
         this.lastScrolledIndex = x;
       }
     );
@@ -176,7 +179,7 @@ export class ChartsComponent implements OnInit, AfterViewInit {
   //toggle(id: string) {
 
   //  for (var i = 0; i < this.dl.chartList.getChartList(true).length; i++) {
-  //    if (this.dl.chartList.getChartList(true)[i].id == "Item " + id) {
+  //    if (this.dl.chartList.getChartList(true)[i].id == id) {
   //      this.dl.chartList.getChartList(true)[i].enable = !this.dl.chartList.getChartList(true)[i].enable;
   //      return;
   //    }
@@ -184,7 +187,9 @@ export class ChartsComponent implements OnInit, AfterViewInit {
   //}
 
   toggle(id: number) {
+    console.log("Before toggle :", this.dl.chartList.getChartList(true)[id].enable);
     this.dl.chartList.getChartList(true)[id].enable = !this.dl.chartList.getChartList(true)[id].enable;
+    console.log("After toggle :", this.dl.chartList.getChartList(true)[id].enable);
   }
 
   //getActiveStatus(id: string) {
@@ -196,12 +201,18 @@ export class ChartsComponent implements OnInit, AfterViewInit {
 
   //}
 
-  getActiveStatus(id: string) {
-    //console.log("getActiveStatus :", id);
+  getActiveStatus(title: string) {
+    
 
-    return { 'active': this.dl.chartList.getChartList(true)[id].enable }
+    for (var i = 0; i < this.dl.chartList.getChartList(true).length; i++) {
+      if (this.dl.chartList.getChartList(true)[i].title == title) {
+        //console.log("getActiveStatus :", title, { 'active': this.dl.chartList.getChartList(true)[i].enable });
+        return { 'active': this.dl.chartList.getChartList(true)[i].enable }
+      }
+    }
     
   }
+
   trackByFunc(index, item) {
     console.log("trackByFunc : ", index, item);
     return item.id;
