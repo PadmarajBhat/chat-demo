@@ -65,8 +65,11 @@ export class ChartsComponent implements OnInit, AfterViewInit {
 
         //var options = { colors: ['#800000', '#8b0000', '#a52a2a', '#b22222', '#dc143c','']};
         var options = {
-          colors: ['#800000', /* '#8b0000',*/ '#a52a2a', '#b22222', '#dc143c', /*'#ff0000',*/ '#cd5c5c', '#ff6347', '#bc8f8f', '#fa8072', '#f08080', '#ffb6c1', '#ffc0cb'
-            , '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1',
+          //colors: ['#800000', /* '#8b0000',*/ '#a52a2a', '#b22222', '#dc143c', /*'#ff0000',*/ '#cd5c5c', '#ff6347', '#bc8f8f', '#fa8072', '#f08080', '#ffb6c1', '#ffc0cb'
+          //  , '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1',
+          colors: ['#78281F', '#943126', '#B03A2E', '#CB4335', '#E74C3C', '#EC7063', '#F1948A', '#F5B7B1', '#FADBD8', '#FDEDEC', '#FDEDEC', '#FDEDEC',
+            '#FDEDEC', '#FDEDEC', '#FDEDEC', '#FDEDEC', '#FDEDEC', '#FDEDEC', '#FDEDEC', '#FDEDEC', '#FDEDEC', '#FDEDEC', '#FDEDEC', '#FDEDEC',
+            '#FDEDEC', '#FDEDEC', '#FDEDEC', '#FDEDEC',
           ]
         };
 
