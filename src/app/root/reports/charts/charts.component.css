@@ -1,5 +1,7 @@
 .active {
   font-weight: bold !important;
+  /*text-align: justify;*/
   /*color: red !important;
   font-size: 1.2rem !important;*/
+  color:#7500c0;
 }

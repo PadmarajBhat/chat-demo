@@ -61,8 +61,14 @@ export class ChartsComponent implements OnInit, AfterViewInit {
         //var options = {
         //  title: this.dl.chartList[idName].title,
         //};
+        //var options = {};
 
-        var options = {};
+        //var options = { colors: ['#800000', '#8b0000', '#a52a2a', '#b22222', '#dc143c','']};
+        var options = {
+          colors: ['#800000', /* '#8b0000',*/ '#a52a2a', '#b22222', '#dc143c', /*'#ff0000',*/ '#cd5c5c', '#ff6347', '#bc8f8f', '#fa8072', '#f08080', '#ffb6c1', '#ffc0cb'
+            , '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1',
+          ]
+        };
 
         let myElem = document.getElementById(idName);
         var chart = new google.visualization.PieChart(myElem);
