@@ -1,12 +1,9 @@
-import { Component, OnInit, ViewChild, ElementRef, HostListener, Input, ChangeDetectorRef, AfterViewChecked, AfterContentChecked, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener, AfterViewInit } from '@angular/core';
 import { DataLoaderService } from '../../../reports/charts/data-loader.service';
 import { LoadScriptService } from '../../../load-script.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
-import { MatBottomSheet, MatBottomSheetRef, MatBottomSheetConfig } from '@angular/material';
-import { trigger, state, style, transition, animate } from '@angular/animations';
-import { ChartsSideNavService } from '../../../charts-side-nav.service';
-//import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
+
 
 declare var google: any;
 
@@ -14,18 +11,6 @@ declare var google: any;
   selector: 'app-charts',
   templateUrl: './charts.component.html',
   styleUrls: ['./charts.component.css'],
-  //animations: [
-  //  trigger('flyInOut', [
-  //    state('in', style({ transform: 'translateX(0)' })),
-  //    transition('void => *', [
-  //      style({ transform: 'translateX(-100%)' }),
-  //      animate(500)
-  //    ]),
-  //    transition('* => void', [
-  //      animate(500, style({ transform: 'translateX(100%)' }))
-  //    ])
-  //  ])
-  //]
 })
 export class ChartsComponent implements OnInit, AfterViewInit {
   
@@ -39,13 +24,11 @@ export class ChartsComponent implements OnInit, AfterViewInit {
     private dl: DataLoaderService,
     private ls: LoadScriptService,
     private _sb: MatSnackBar,
-    private _bottomSheet: MatBottomSheet,
   ) {
   }
 
 
   ngOnInit() {
-    //this.scrollIndexChange.setScrollIndexChange(this.viewport.scrolledIndexChange);
     for (var i = 0; i < this.dl.chartList.getChartList(true).length; i++) {
       this.cssArray.push(false);
     }
@@ -58,19 +41,7 @@ export class ChartsComponent implements OnInit, AfterViewInit {
 
         console.log("the subscribed value ", x, idName);
         const data = google.visualization.arrayToDataTable(x['data']);
-        //var options = {
-        //  title: this.dl.chartList[idName].title,
-        //};
-        //var options = {};
-
-        //var options = { colors: ['#800000', '#8b0000', '#a52a2a', '#b22222', '#dc143c','']};
         var options = {
-          //colors: ['#800000', /* '#8b0000',*/ '#a52a2a', '#b22222', '#dc143c', /*'#ff0000',*/ '#cd5c5c', '#ff6347', '#bc8f8f', '#fa8072', '#f08080', '#ffb6c1', '#ffc0cb'
-          //  , '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1', '#ffe4e1',
-          //colors: ['#78281F', '#943126', '#B03A2E', '#CB4335', '#E74C3C', '#EC7063', '#F1948A', '#F5B7B1', '#FADBD8', '#FDEDEC', '#FDEDEC', '#FDEDEC',
-          //  '#FDEDEC', '#FDEDEC', '#FDEDEC', '#FDEDEC', '#FDEDEC', '#FDEDEC', '#FDEDEC', '#FDEDEC', '#FDEDEC', '#FDEDEC', '#FDEDEC', '#FDEDEC',
-          //  '#FDEDEC', '#FDEDEC', '#FDEDEC', '#FDEDEC',
-          //]
           colors : x['colors']
         };
 
@@ -87,10 +58,6 @@ export class ChartsComponent implements OnInit, AfterViewInit {
 
   drawAll() {
 
-    //for (let id of Object.keys(this.dl.chartList)) {
-    //  this.drawChart(id);
-    //}
-
     for (let item of this.dl.chartList.getChartList(true)) {
       this.drawChart(item['id']);
     }
@@ -101,17 +68,12 @@ export class ChartsComponent implements OnInit, AfterViewInit {
   }
 
   clickedMe(idName: string, add: boolean) {
-    //this.dl.chartList[idName].enable = !this.dl.chartList[idName].enable;
     this.dl.chartList.setIdEnable(idName);
 
 
     if (add) {
-      //this.zone.run(() => {
-      //this._sb.openFromComponent(SnackbarSuccessComponent, { duration: 3000, verticalPosition: 'top', horizontalPosition: 'center' });
-      this._sb.open(idName + " added to Dashboard", null, { duration: 3000, verticalPosition: 'top'});//, "Undo",{ duration: 3000, verticalPosition: 'top', horizontalPosition: 'center' });
-      //});
+      this._sb.open(idName + " added to Dashboard", null, { duration: 3000, verticalPosition: 'top'});
     } else {
-      //this._sb.openFromComponent(SnackbarSuccessComponent, { duration: 3000, verticalPosition: 'top', horizontalPosition: 'center' });
       this._sb.open(idName + " removed from Dashboard", null, { duration: 3000, verticalPosition: 'top' });
     }
   }
@@ -133,7 +95,6 @@ export class ChartsComponent implements OnInit, AfterViewInit {
       tempArray.push(item.title);
     }
     return tempArray;
-    //return Object.keys(this.dl.chartList.getChartList(true));
   }
 
   ngAfterViewInit() {
@@ -184,43 +145,6 @@ export class ChartsComponent implements OnInit, AfterViewInit {
     let myElem = document.getElementById(id +"_card");
     myElem.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' });
     console.log("moveToId : ", id);
-  }
-
-  //toggle(id: string) {
-
-  //  for (var i = 0; i < this.dl.chartList.getChartList(true).length; i++) {
-  //    if (this.dl.chartList.getChartList(true)[i].id == id) {
-  //      this.dl.chartList.getChartList(true)[i].enable = !this.dl.chartList.getChartList(true)[i].enable;
-  //      return;
-  //    }
-  //  }
-  //}
-
-  toggle(id: number) {
-    console.log("Before toggle :", this.dl.chartList.getChartList(true)[id].enable);
-    this.dl.chartList.getChartList(true)[id].enable = !this.dl.chartList.getChartList(true)[id].enable;
-    console.log("After toggle :", this.dl.chartList.getChartList(true)[id].enable);
-  }
-
-  //getActiveStatus(id: string) {
-  //  for (var i = 0; i < this.dl.chartList.getChartList(true).length; i++) {
-  //    if (this.dl.chartList.getChartList(true)[i].id == id) {
-  //      return { 'active': this.dl.chartList.getChartList(true)[i].enable };
-  //    }
-  //  }
-
-  //}
-
-  getActiveStatus(title: string) {
-    
-
-    for (var i = 0; i < this.dl.chartList.getChartList(true).length; i++) {
-      if (this.dl.chartList.getChartList(true)[i].title == title) {
-        //console.log("getActiveStatus :", title, { 'active': this.dl.chartList.getChartList(true)[i].enable });
-        return { 'active': this.dl.chartList.getChartList(true)[i].enable }
-      }
-    }
-    
   }
 
   trackByFunc(index, item) {
