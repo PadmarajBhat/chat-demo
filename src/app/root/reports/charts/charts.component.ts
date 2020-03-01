@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, HostListener, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener, AfterViewInit, Input } from '@angular/core';
 import { DataLoaderService } from '../../../reports/charts/data-loader.service';
 import { LoadScriptService } from '../../../load-script.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -17,6 +17,8 @@ export class ChartsComponent implements OnInit, AfterViewInit {
   @ViewChild(CdkVirtualScrollViewport, { static: true })
   viewport: CdkVirtualScrollViewport;
 
+  @Input() isDashboard: boolean;
+
   lastScrolledIndex: number;
   cssArray = new Array();
 
@@ -29,9 +31,11 @@ export class ChartsComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit() {
-    for (var i = 0; i < this.dl.chartList.getChartList(true).length; i++) {
+    for (var i = 0; i < this.dl.getChartList(this.isDashboard).length; i++) {
       this.cssArray.push(false);
     }
+
+    console.log("parent input data: isDashboard - ", this.isDashboard);
   }
 
   drawChart(idName) {
@@ -39,7 +43,7 @@ export class ChartsComponent implements OnInit, AfterViewInit {
     subscriber.subscribe(
       (x) => {
 
-        console.log("the subscribed value ", x, idName);
+        //console.log("the subscribed value ", x, idName);
         const data = google.visualization.arrayToDataTable(x['data']);
         var options = {
           colors : x['colors']
@@ -52,23 +56,23 @@ export class ChartsComponent implements OnInit, AfterViewInit {
 
       (err) => { console.log(idName + " error occurred in the subscription", err) },
 
-      () => { console.log(idName + " subscription completed !!!") }
+      () => { }// console.log(idName + " subscription completed !!!") }
     );
   }
 
   drawAll() {
 
-    for (let item of this.dl.chartList.getChartList(true)) {
+    for (let item of this.dl.getChartList(this.isDashboard)) {
       this.drawChart(item['id']);
     }
   }
 
   checkSelected(idName: string) {
-    return this.dl.chartList.getIdEnable(idName);
+    return this.dl.getIdEnable(idName);
   }
 
   clickedMe(idName: string, add: boolean) {
-    this.dl.chartList.setIdEnable(idName);
+    this.dl.setIdEnable(idName);
 
 
     if (add) {
@@ -86,15 +90,6 @@ export class ChartsComponent implements OnInit, AfterViewInit {
       'flex-direction': 'column',
       'height.px': (window.innerHeight - this.viewport.elementRef.nativeElement.parentElement.offsetTop)  * .7,
     }
-  }
-
-  getIdList() {
-    let tempArray = new Array();
-
-    for (let item of this.dl.chartList.getChartList(true)) {
-      tempArray.push(item.title);
-    }
-    return tempArray;
   }
 
   ngAfterViewInit() {
@@ -128,12 +123,12 @@ export class ChartsComponent implements OnInit, AfterViewInit {
   onOrientationChange() {
 
 
-    for (let id of Object.keys(this.dl.chartList.getChartList(true))) {
+    for (let id of Object.keys(this.dl.getChartList(this.isDashboard))) {
       try {
         let myElem = document.getElementById(id);
         myElem.removeChild(myElem.firstChild);
       } catch {
-        console.log("Accidental/Rare Exceptions for ", id);
+        //console.log("Accidental/Rare Exceptions for ", id);
       }
     }
     setTimeout(() => { google.charts.setOnLoadCallback(this.drawAll()); }, 5);
@@ -141,14 +136,19 @@ export class ChartsComponent implements OnInit, AfterViewInit {
   }
 
   moveToId(id: string) {
-    console.log("moveToId : ", id+"_card");
+    //console.log("moveToId : ", id+"_card");
     let myElem = document.getElementById(id +"_card");
     myElem.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' });
-    console.log("moveToId : ", id);
+    //console.log("moveToId : ", id);
   }
 
   trackByFunc(index, item) {
     console.log("trackByFunc : ", index, item);
     return item.id;
+  }
+
+  getMyChartList() {
+    //console.log("getMyChartList");
+    return this.dl.getChartList(this.isDashboard);
   }
 }
