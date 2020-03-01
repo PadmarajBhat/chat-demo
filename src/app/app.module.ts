@@ -29,7 +29,7 @@ import { Pane, ViewChildrenComp } from './view-child/view-child.component';
 import { NpmGoogleChartsComponent } from './reports/charts/npm-google-charts/npm-google-charts.component';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { ServiceLoadCheckComponent } from './reports/charts/service-load-check/service-load-check.component';
-import { RelocationWiseTrendComponent, PizzaPartyComponent } from './reports/charts/relocation-wise-trend/relocation-wise-trend.component';
+
 import { ChartListComponent } from './reports/chart-list/chart-list.component';
 //import { DashboardComponent } from './reports/dashboard/dashboard.component';
 import { SnackbarSuccessComponent } from './reports/charts/snackbar-success/snackbar-success.component';
@@ -38,7 +38,7 @@ import { HomeComponent } from './root/home/home.component';
 import { UploadComponent } from './root/upload/upload.component';
 import { AnalysisComponent } from './root/analysis/analysis.component';
 import { ChartsComponent } from './root/reports/charts/charts.component';
-import { DashboardComponent } from './root/reports/dashboard/dashboard.component';
+
 import { ReportsComponent } from './root/reports/reports.component';
 import { SideEndDrawComponent } from './root/reports/report-ui/side-end-draw/side-end-draw.component';
 import { ScrollCheckComponent } from './scroll-check/scroll-check.component';
@@ -61,10 +61,9 @@ import { NavigationScrollCheckComponent } from './navigation-scroll-check/naviga
     Pane,
     NpmGoogleChartsComponent,
     ServiceLoadCheckComponent,
-    RelocationWiseTrendComponent,
+
     ChartListComponent,
-    DashboardComponent,
-    PizzaPartyComponent,
+
     SnackbarSuccessComponent,
     RootComponent,
     HomeComponent,
@@ -96,6 +95,6 @@ import { NavigationScrollCheckComponent } from './navigation-scroll-check/naviga
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [PizzaPartyComponent, SnackbarSuccessComponent,]
+  entryComponents: [SnackbarSuccessComponent,]
 })
 export class AppModule { }

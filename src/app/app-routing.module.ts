@@ -12,13 +12,13 @@ import { ButtonsComponent } from './reports/charts/buttons/buttons.component';
 import { ViewChildrenComp } from './view-child/view-child.component';
 import { NpmGoogleChartsComponent } from './reports/charts/npm-google-charts/npm-google-charts.component';
 import { ServiceLoadCheckComponent } from './reports/charts/service-load-check/service-load-check.component';
-import { RelocationWiseTrendComponent } from './reports/charts/relocation-wise-trend/relocation-wise-trend.component';
+
 import { ChartListComponent } from './reports/chart-list/chart-list.component';
 //import { DashboardComponent } from './reports/dashboard/dashboard.component';
 import { HomeComponent } from './root/home/home.component';
 import { UploadComponent } from './root/upload/upload.component';
 import { AnalysisComponent } from './root/analysis/analysis.component';
-import { DashboardComponent } from './root/reports/dashboard/dashboard.component';
+
 import { ChartsComponent } from './root/reports/charts/charts.component';
 import { RootComponent } from './root/root.component';
 import { ReportsComponent } from './root/reports/reports.component';
@@ -43,9 +43,8 @@ const routes: Routes = [
   { path: "child", component: ViewChildrenComp },
   //{ path: "charts", component: NpmGoogleChartsComponent },
   { path: "service", component: ServiceLoadCheckComponent },
-  { path: "relocation", component: RelocationWiseTrendComponent },
+
   { path: "charts", component: ChartListComponent },
-  { path: "dashboard", component: DashboardComponent },
   {
     path: "root", component: RootComponent,
     children: [
@@ -54,11 +53,6 @@ const routes: Routes = [
       { path: "analysis", component: AnalysisComponent },
       {
         path: "reports", component: ReportsComponent,
-        children: [
-          { path: "dashboard", component: DashboardComponent, data: { animation: "dashboard" } },
-          { path: "charts", component: ChartsComponent, data: { animation: "charts" } },
-        ]
-
       }
     ]
 

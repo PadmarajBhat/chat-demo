@@ -38,12 +38,26 @@ export class ChartsComponent implements OnInit, AfterViewInit {
     console.log("parent input data: isDashboard - ", this.isDashboard);
   }
 
+  deleteCharts() {
+    for (let id of Object.keys(this.dl.getChartList(this.isDashboard))) {
+      try {
+        let myElem = document.getElementById(id);
+        myElem.removeChild(myElem.firstChild);
+      } catch {
+        //console.log("Accidental/Rare Exceptions for ", id);
+      }
+    }
+    //setTimeout(() => { }, 100);//wait for a second for all the charts to get deleted.
+  }
+  
+
+  
   drawChart(idName) {
     let subscriber = this.dl.getIdData(idName);
     subscriber.subscribe(
       (x) => {
 
-        //console.log("the subscribed value ", x, idName);
+        console.log("the subscribed value ", x, idName);
         const data = google.visualization.arrayToDataTable(x['data']);
         var options = {
           colors : x['colors']
@@ -61,9 +75,10 @@ export class ChartsComponent implements OnInit, AfterViewInit {
   }
 
   drawAll() {
-
+    this.deleteCharts();
     for (let item of this.dl.getChartList(this.isDashboard)) {
-      this.drawChart(item['id']);
+      //this.drawChart(item['id']);
+      setTimeout(() => { this.drawChart(item['id']) }, 10);
     }
   }
 
@@ -123,14 +138,7 @@ export class ChartsComponent implements OnInit, AfterViewInit {
   onOrientationChange() {
 
 
-    for (let id of Object.keys(this.dl.getChartList(this.isDashboard))) {
-      try {
-        let myElem = document.getElementById(id);
-        myElem.removeChild(myElem.firstChild);
-      } catch {
-        //console.log("Accidental/Rare Exceptions for ", id);
-      }
-    }
+    this.deleteCharts();
     setTimeout(() => { google.charts.setOnLoadCallback(this.drawAll()); }, 5);
 
   }

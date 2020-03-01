@@ -2,14 +2,15 @@
 
   <mat-tab label="Dashboard">
     <ng-template matTabContent>
-      <app-charts [isDashboard]="false"></app-charts>
+      <app-charts [isDashboard]="true"></app-charts>
     </ng-template>
   </mat-tab>
 
   <mat-tab label="Charts">
     <ng-template matTabContent>
-      <app-charts [isDashboard]="true"></app-charts>
-    </ng-template>
+    <app-charts [isDashboard]="false"></app-charts>
+  </ng-template>
+    <!--<app-charts [isDashboard]="true"></app-charts>-->
   </mat-tab>
 
 </mat-tab-group>
