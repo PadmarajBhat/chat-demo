@@ -41,7 +41,7 @@ export class ChartsComponent implements OnInit, AfterViewInit {
   deleteCharts() {
     for (let id of Object.keys(this.dl.getChartList(this.isDashboard))) {
       try {
-        let myElem = document.getElementById(id);
+        let myElem = document.getElementById(id+this.isDashboard);
         myElem.removeChild(myElem.firstChild);
       } catch {
         //console.log("Accidental/Rare Exceptions for ", id);
@@ -50,7 +50,13 @@ export class ChartsComponent implements OnInit, AfterViewInit {
     //setTimeout(() => { }, 100);//wait for a second for all the charts to get deleted.
   }
   
+  getCardName(title: string) {
+    return title + '_card' + this.isDashboard;
+  }
 
+  getCardContentName(idName: string) {
+    return idName + this.isDashboard;
+  }
   
   drawChart(idName) {
     let subscriber = this.dl.getIdData(idName);
@@ -63,7 +69,7 @@ export class ChartsComponent implements OnInit, AfterViewInit {
           colors : x['colors']
         };
 
-        let myElem = document.getElementById(idName);
+        let myElem = document.getElementById(idName+this.isDashboard);
         var chart = new google.visualization.PieChart(myElem);
         chart.draw(data, options);
       },
