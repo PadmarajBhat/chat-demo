@@ -3,7 +3,7 @@
   <cdk-virtual-scroll-viewport id="cdkViewPort" itemSize="500" maxBufferPx="20000" style="height:535px" >
 
     <div *cdkVirtualFor="let item of getMyChartList()">
-      <mat-card [attr.id]="item['title']+'_card'" [ngStyle]="getCareerLevelFraudStyle()">
+      <mat-card [attr.id]="getCardName(item.title)" [ngStyle]="getCareerLevelFraudStyle()">
 
         <mat-card-header>
           <mat-card-title>{{item["title"]}}</mat-card-title>
@@ -17,7 +17,7 @@
           </button>
         </mat-card-header>
 
-        <mat-card-content [ngStyle]="{'flex':1}" [attr.id]="item['id']" #relocationTrend>
+        <mat-card-content [ngStyle]="{'flex':1}" [attr.id]="getCardContentName(item['id'])" #relocationTrend>
         </mat-card-content>
 
       </mat-card>
