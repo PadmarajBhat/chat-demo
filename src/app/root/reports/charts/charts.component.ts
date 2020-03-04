@@ -140,7 +140,7 @@ export class ChartsComponent implements OnInit, AfterViewInit {
     console.log("ngAfterViewInit should be called only once during the component life cycle");
   }
 
-  @HostListener('window:resize', ['$event, { passive: true }'])
+  @HostListener('window:resize')
   onOrientationChange() {
 
 
