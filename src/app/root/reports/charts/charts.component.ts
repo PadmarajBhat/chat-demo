@@ -83,8 +83,8 @@ export class ChartsComponent implements OnInit, AfterViewInit {
   drawAll() {
     this.deleteCharts();
     for (let item of this.dl.getChartList(this.isDashboard)) {
-      //this.drawChart(item['id']);
-      setTimeout(() => { this.drawChart(item['id']) }, 10);
+      this.drawChart(item['id']);
+      //setTimeout(() => { this.drawChart(item['id']) }, 10);
     }
   }
 
