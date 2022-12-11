@@ -13,7 +13,7 @@
     "bootstrap": "^4.4.1",
     "cors": "^2.8.5",
     "dialogflow": "^1.1.1",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "mongoose": "^5.8.7",
     "pandas-js": "^0.2.4"
   }
